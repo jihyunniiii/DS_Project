@@ -14,8 +14,12 @@ public class FadeInOut : MonoBehaviour
     public void FadeToNext() {
         animator.SetTrigger("FadeOut");
     }
-
+    public void FadeOutToIn()
+    {
+        animator.SetTrigger("FadeIn");
+    }
     public void FadeComplete() {
-        SceneManager.LoadScene(NextScene);
+        if (NextScene == null) 
+            SceneManager.LoadScene(NextScene);
     }
 }
