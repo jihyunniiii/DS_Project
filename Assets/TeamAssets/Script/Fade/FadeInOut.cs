@@ -19,7 +19,7 @@ public class FadeInOut : MonoBehaviour
         animator.SetTrigger("FadeIn");
     }
     public void FadeComplete() {
-        if (NextScene == null) 
+        //if (NextScene == null) 
             SceneManager.LoadScene(NextScene);
     }
 }
