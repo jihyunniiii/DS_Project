@@ -5,18 +5,18 @@ using UnityEngine;
 public class CameraMove : MonoBehaviour
 {
     public Transform target;
+    public float distance = 6f;
+    public float height = 4f;
+
     private Transform tr;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
         tr = GetComponent<Transform>();
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        tr.position = new Vector3(target.position.x - 0.52f, tr.position.y, target.position.z - 6.56f);
-
+        tr.position = target.position - (1 * Vector3.forward * distance) + (Vector3.up * height);
         tr.LookAt(target);
     }
 }
