@@ -5,8 +5,8 @@ using UnityEngine;
 public class CameraMove : MonoBehaviour
 {
     public Transform target;
-    public float distance = 6f;
-    public float height = 4f;
+    public float distance = 5f;
+    public float height = 3f;
 
     private Transform tr;
 
