@@ -210,4 +210,5 @@ public class CharacterSet : MonoBehaviour
             animator.SetTrigger("Jump");
         }
     }
+   
 }
