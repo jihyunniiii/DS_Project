@@ -96,7 +96,7 @@ public class CharacterSet : MonoBehaviour
             collisions.Remove(collision.collider);
         }
        
-        if (collisions.Count >= 0) { Debug.Log("!"); isGrounded = false; }
+        if (collisions.Count >= 0) { isGrounded = false; }
     }
 
     private void Update()
