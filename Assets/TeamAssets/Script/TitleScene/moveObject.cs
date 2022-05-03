@@ -15,8 +15,8 @@ public class moveObject : MonoBehaviour {
     }
 
 
-    private float speed_move = 0.01f;
-    private float speed_rota = 0.01f;
+    private float speed_move = 0.004f;
+    private float speed_rota = 0.004f;
 
     void moveObjectFunc()
     {
