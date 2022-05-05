@@ -7,6 +7,7 @@ public class HexTileMapTUT : MonoBehaviour
 {
     public GameObject hexTilePrefab;
     public Transform holder;
+    public int y = 0;
     
     int count = 0;
 
@@ -39,10 +40,10 @@ public class HexTileMapTUT : MonoBehaviour
 
                 if (z % 2 == 0)
                 {
-                    pos = new Vector3(x * tileXOffset, 0, z * tileZOffset);
+                    pos = new Vector3(x * tileXOffset, y, z * tileZOffset);
                 }
                 else {
-                    pos = new Vector3(x * tileXOffset + tileXOffset / 2, 0, z * tileZOffset);
+                    pos = new Vector3(x * tileXOffset + tileXOffset / 2, y, z * tileZOffset);
                 }
                 StartCoroutine(SetTileInfo(TempGo, x, z, pos));
                 count++;
@@ -74,5 +75,6 @@ public class HexTileMapTUT : MonoBehaviour
         for (int x = 0; x < count; x++) {
             temp[x].GetComponent<MeshCollider>().isTrigger = false; 
         }
+       
     }
 }
