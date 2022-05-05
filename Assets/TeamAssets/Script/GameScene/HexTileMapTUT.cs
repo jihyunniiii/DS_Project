@@ -7,9 +7,12 @@ public class HexTileMapTUT : MonoBehaviour
 {
     public GameObject hexTilePrefab;
     public Transform holder;
+    
+    int count = 0;
 
     [SerializeField] int mapWidth = 25;
-    [SerializeField] int mapHeight = 12;
+    [SerializeField] int mapHeight = 25;
+
     float tileXOffset = 1.0f;
     float tileZOffset = 0.87f;
 
@@ -17,6 +20,7 @@ public class HexTileMapTUT : MonoBehaviour
     void Start()
     {
         CreatHexTileMap();
+        Invoke("settingFinish", 0.1f);
     }
 
     void CreatHexTileMap() {
@@ -26,7 +30,7 @@ public class HexTileMapTUT : MonoBehaviour
         float mapZmin = -mapHeight / 2;
         float mapZmax = mapHeight / 2;
 
-        for (float x = mapXmin; x < mapXmax; x++) 
+        for (float x = mapXmin; x < mapXmax; x++)
         {
             for (float z = mapZmin; z < mapZmax; z++)
             {
@@ -38,14 +42,15 @@ public class HexTileMapTUT : MonoBehaviour
                     pos = new Vector3(x * tileXOffset, 0, z * tileZOffset);
                 }
                 else {
-                    pos = new Vector3(x*tileXOffset + tileXOffset/2, 0, z * tileZOffset);  
+                    pos = new Vector3(x * tileXOffset + tileXOffset / 2, 0, z * tileZOffset);
                 }
-                StartCoroutine(SetTileInfo(TempGo, x, z ,pos));
+                StartCoroutine(SetTileInfo(TempGo, x, z, pos));
+                count++;
             }
         }
     }
 
-    
+
 
     IEnumerator SetTileInfo(GameObject tempGo, float x, float z, Vector3 pos)
     {
@@ -57,8 +62,17 @@ public class HexTileMapTUT : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-       if (other.gameObject.tag == "Hex") { 
+        if (other.gameObject.tag == "Hex") {
             Destroy(other.gameObject);
-       }
+            count--;
+        }
+    }
+
+    private void settingFinish() {
+        gameObject.GetComponent<SphereCollider>().enabled = false;
+        GameObject[] temp = GameObject.FindGameObjectsWithTag("Hex");
+        for (int x = 0; x < count; x++) {
+            temp[x].GetComponent<MeshCollider>().isTrigger = false; 
+        }
     }
 }
