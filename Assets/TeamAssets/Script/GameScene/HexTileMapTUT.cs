@@ -7,8 +7,6 @@ public class HexTileMapTUT : MonoBehaviour
 {
     public GameObject[] hexTilePrefab;
     public Transform holder;
-    
-    int count = 0;
 
     [SerializeField] int mapWidth = 25;
     [SerializeField] int mapHeight = 25;
@@ -47,7 +45,6 @@ public class HexTileMapTUT : MonoBehaviour
                         pos = new Vector3(x * tileXOffset + tileXOffset / 2, 0, z * tileZOffset);
                     }
                     StartCoroutine(SetTileInfo(TempGo, x, z, pos));
-                    count++;
                 }
             }
         }
@@ -85,7 +82,7 @@ public class HexTileMapTUT : MonoBehaviour
 
     private void settingFinish() {
         gameObject.GetComponent<SphereCollider>().enabled = false;
-        GameObject[] temp1 = GameObject.FindGameObjectsWithTag("Hex");
+        GameObject[] temp1 = GameObject.FindGameObjectsWithTag("Hex1");
         GameObject[] temp2 = GameObject.FindGameObjectsWithTag("Hex2");
         GameObject[] temp3 = GameObject.FindGameObjectsWithTag("Hex3");
         GameObject[] temp4 = GameObject.FindGameObjectsWithTag("Hex4");

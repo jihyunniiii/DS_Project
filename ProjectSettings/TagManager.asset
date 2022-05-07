@@ -10,7 +10,6 @@ TagManager:
   - Hex3
   - Hex4
   - Hex5
-  - Hex
   layers:
   - Default
   - TransparentFX
