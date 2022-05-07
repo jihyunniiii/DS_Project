@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6460671534528976667}
   m_Layer: 0
   m_Name: Hex29
-  m_TagString: Hex
+  m_TagString: Hex2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

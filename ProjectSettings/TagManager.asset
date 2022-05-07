@@ -5,7 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - FadeController
-  - Hex
+  - Hex2
+  - Hex1
+  - Hex3
+  - Hex4
+  - Hex5
   layers:
   - Default
   - TransparentFX
