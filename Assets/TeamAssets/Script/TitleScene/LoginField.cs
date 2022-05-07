@@ -7,11 +7,12 @@ using UnityEngine.UI;
 public class LoginField : MonoBehaviour
 {
     public InputField idInput;
+    public InputField pwInput;
     public InputField myIndateInput;
 
     public InputField userNicknameInput;
 
-    public InputField userIndateInput;
+    //public InputField userIndateInput;
 
     public Text nickname;
 
@@ -19,7 +20,7 @@ public class LoginField : MonoBehaviour
     {
         // Debug.Log(Backend.BMember.Logout());
 
-        var result = Backend.BMember.CustomLogin(idInput.text, idInput.text);
+        var result = Backend.BMember.CustomLogin(idInput.text, pwInput.text);
 
         if (result.IsSuccess())
         {
@@ -41,7 +42,7 @@ public class LoginField : MonoBehaviour
         }
     }
 
-    public void LogOut()
+   public void LogOut()
     {
         Debug.Log(Backend.BMember.Logout());
     }
@@ -67,15 +68,5 @@ public class LoginField : MonoBehaviour
     void GetIndate()
     {
         myIndateInput.text = Backend.UserInDate;
-    }
-
-    public void SearchUser()
-    {
-        Backend.Social.GetUserInfoByNickName(userNicknameInput.text, callback =>
-        {
-            Debug.Log("검색 결과 : " + callback);
-            userIndateInput.text = callback.GetReturnValuetoJSON()["row"]["inDate"].ToString();
-        });
-
     }
 }
