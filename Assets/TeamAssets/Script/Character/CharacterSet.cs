@@ -57,7 +57,7 @@ public class CharacterSet : MonoBehaviour
             }
         }
     }
-    private void OnCollisionStay(Collision collision)
+   private void OnCollisionStay(Collision collision)
     {
         ContactPoint[] contactPoints = collision.contacts;
         bool validSurfaceNormal = false;
@@ -68,7 +68,7 @@ public class CharacterSet : MonoBehaviour
                 validSurfaceNormal = true; break;
             }
         }
-
+       
         if (validSurfaceNormal)
         {
             isGrounded = true;
@@ -79,6 +79,7 @@ public class CharacterSet : MonoBehaviour
         }
         else
         {
+            
             if (collisions.Contains(collision.collider))
             {
                 collisions.Remove(collision.collider);
@@ -89,11 +90,13 @@ public class CharacterSet : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
+        
         if (collisions.Contains(collision.collider))
         {
             collisions.Remove(collision.collider);
         }
-        if (collisions.Count == 0) { isGrounded = false; }
+       
+        if (collisions.Count >= 0) { isGrounded = false; }
     }
 
     private void Update()
@@ -194,6 +197,10 @@ public class CharacterSet : MonoBehaviour
     {
         bool jumpCooldownOver = (Time.time - jumpTimeStamp) >= minJumpInterval;
 
+        if (isGrounded && rigidBody.velocity.y < -1) { 
+            isGrounded = false;
+        }
+
         if (jumpCooldownOver && isGrounded && jumpInput)
         {
             jumpTimeStamp = Time.time;
@@ -210,5 +217,4 @@ public class CharacterSet : MonoBehaviour
             animator.SetTrigger("Jump");
         }
     }
-   
 }
