@@ -48,7 +48,7 @@ MonoBehaviour:
   objectTofollow: {fileID: 0}
   followSpeed: 10
   sensitivity: 200
-  clampAngle: 70
+  clampAngle: 45
   realCamera: {fileID: 3523154836710674163}
   dirNorMalized: {x: 0, y: 0, z: 0}
   finalDir: {x: 0, y: 0, z: 0}
