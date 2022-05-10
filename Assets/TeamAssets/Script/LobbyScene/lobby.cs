@@ -10,6 +10,8 @@ public class lobby : MonoBehaviour
     public GameObject UI;
     public GameObject SettingUI;
     public GameObject SettingSound;
+    public GameObject RankUI;
+
     public AudioMixer masterMixer;
     public Slider audioSlider;
    
@@ -76,6 +78,12 @@ public class lobby : MonoBehaviour
             SettingSound.gameObject.SetActive(false);
             UI.gameObject.SetActive(true);
         }
+
+        else if (RankUI.activeSelf == true && UI.activeSelf == false)
+        {
+            RankUI.gameObject.SetActive(false);
+            UI.gameObject.SetActive(true);
+        }
     }
 
     public void AudioControl(float sliderVal)
@@ -85,6 +93,25 @@ public class lobby : MonoBehaviour
 
     public void Camera()
     {
+        string timestamp = System.DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+        string fileName = "DONGSIM-SCREENSHOT-" + timestamp + ".png";
 
+        if (UI.activeSelf == true)
+        {
+            UI.gameObject.SetActive(false);
+        }
+
+        ScreenCapture.CaptureScreenshot(fileName);
+
+        UI.gameObject.SetActive(true);
+    }
+
+    public void RankButtonClick()
+    {
+        if (UI.activeSelf == true)
+        {
+            RankUI.gameObject.SetActive(true);
+            UI.gameObject.SetActive(false);
+        }
     }
 }
