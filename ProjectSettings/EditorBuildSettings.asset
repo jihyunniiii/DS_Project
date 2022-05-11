@@ -14,10 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/TeamAssets/Scenes/MainLobby.unity
     guid: ab24909c8362f044fa650fa74b248a79
-  - enabled: 1
+  - enabled: 0
     path: Assets/TeamAssets/Scenes/GameEnterRoom.unity
     guid: b86fa74ec8d53a34c9143ba2627abc1f
-  - enabled: 1
+  - enabled: 0
     path: Assets/TeamAssets/Scenes/GameRoom.unity
     guid: 5c7969c5853c1594fbe34ba0541ff9a6
   m_configObjects: {}
