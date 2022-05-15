@@ -1,0 +1,160 @@
+fileFormatVersion: 2
+guid: 4d77b2b097b85bd4eb1b02c10a32d970
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: antenna_1
+    100002: antenna_11
+    100004: antenna_2
+    100006: antenna_22
+    100008: antenna_3
+    100010: antenna_31
+    100012: antenna_33
+    100014: antenna_4
+    100016: antenna_41
+    100018: antenna_42
+    100020: antenna_44
+    100022: //RootNode
+    100024: solar_battery
+    100026: solar_battery_2
+    100028: solar_battery_3
+    400000: antenna_1
+    400002: antenna_11
+    400004: antenna_2
+    400006: antenna_22
+    400008: antenna_3
+    400010: antenna_31
+    400012: antenna_33
+    400014: antenna_4
+    400016: antenna_41
+    400018: antenna_42
+    400020: antenna_44
+    400022: //RootNode
+    400024: solar_battery
+    400026: solar_battery_2
+    400028: solar_battery_3
+    2100000: props_color
+    2100002: No Name
+    2300000: antenna_1
+    2300002: antenna_11
+    2300004: antenna_2
+    2300006: antenna_22
+    2300008: antenna_3
+    2300010: antenna_31
+    2300012: antenna_33
+    2300014: antenna_4
+    2300016: antenna_41
+    2300018: antenna_42
+    2300020: antenna_44
+    2300022: solar_battery
+    2300024: solar_battery_2
+    2300026: solar_battery_3
+    3300000: antenna_1
+    3300002: antenna_11
+    3300004: antenna_2
+    3300006: antenna_22
+    3300008: antenna_3
+    3300010: antenna_31
+    3300012: antenna_33
+    3300014: antenna_4
+    3300016: antenna_41
+    3300018: antenna_42
+    3300020: antenna_44
+    3300022: solar_battery
+    3300024: solar_battery_2
+    3300026: solar_battery_3
+    4300000: antenna_44
+    4300002: antenna_11
+    4300004: antenna_1
+    4300006: antenna_33
+    4300008: antenna_3
+    4300010: antenna_31
+    4300012: antenna_42
+    4300014: antenna_41
+    4300016: antenna_4
+    4300018: antenna_22
+    4300020: antenna_2
+    4300022: solar_battery_3
+    4300024: solar_battery_2
+    4300026: solar_battery
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 1
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

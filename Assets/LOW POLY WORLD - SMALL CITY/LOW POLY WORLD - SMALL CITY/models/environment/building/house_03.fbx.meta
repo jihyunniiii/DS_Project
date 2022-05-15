@@ -1,0 +1,190 @@
+fileFormatVersion: 2
+guid: 923563941d19fff40b334fd801e7194e
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: house_3zone_1
+    100004: house_3zone_2
+    100006: house_3zone_2_window
+    100008: house_3zone_3
+    100010: house_3zone_4
+    100012: house_3zone_4_window
+    100014: house_3zone_5
+    100016: house_3zone_5_stair
+    100018: house_3zone_5_window
+    100020: house_3zone_6
+    100022: house_3zone_6_window
+    100024: house_3zone_7
+    100026: house_3zone_7_window
+    100028: house_3zone_8
+    100030: house_3zone_8_window
+    100032: house_3zone_9
+    100034: house_3zone_9_stair
+    100036: house_3zone_9_window
+    400000: //RootNode
+    400002: house_3zone_1
+    400004: house_3zone_2
+    400006: house_3zone_2_window
+    400008: house_3zone_3
+    400010: house_3zone_4
+    400012: house_3zone_4_window
+    400014: house_3zone_5
+    400016: house_3zone_5_stair
+    400018: house_3zone_5_window
+    400020: house_3zone_6
+    400022: house_3zone_6_window
+    400024: house_3zone_7
+    400026: house_3zone_7_window
+    400028: house_3zone_8
+    400030: house_3zone_8_window
+    400032: house_3zone_9
+    400034: house_3zone_9_stair
+    400036: house_3zone_9_window
+    2100000: glass
+    2100002: color
+    2300000: house_3zone_1
+    2300002: house_3zone_2
+    2300004: house_3zone_2_window
+    2300006: house_3zone_3
+    2300008: house_3zone_4
+    2300010: house_3zone_4_window
+    2300012: house_3zone_5
+    2300014: house_3zone_5_stair
+    2300016: house_3zone_5_window
+    2300018: house_3zone_6
+    2300020: house_3zone_6_window
+    2300022: house_3zone_7
+    2300024: house_3zone_7_window
+    2300026: house_3zone_8
+    2300028: house_3zone_8_window
+    2300030: house_3zone_9
+    2300032: house_3zone_9_stair
+    2300034: house_3zone_9_window
+    3300000: house_3zone_1
+    3300002: house_3zone_2
+    3300004: house_3zone_2_window
+    3300006: house_3zone_3
+    3300008: house_3zone_4
+    3300010: house_3zone_4_window
+    3300012: house_3zone_5
+    3300014: house_3zone_5_stair
+    3300016: house_3zone_5_window
+    3300018: house_3zone_6
+    3300020: house_3zone_6_window
+    3300022: house_3zone_7
+    3300024: house_3zone_7_window
+    3300026: house_3zone_8
+    3300028: house_3zone_8_window
+    3300030: house_3zone_9
+    3300032: house_3zone_9_stair
+    3300034: house_3zone_9_window
+    4300000: house_3zone_7_window
+    4300002: house_3zone_7
+    4300004: house_3zone_6_window
+    4300006: house_3zone_6
+    4300008: house_3zone_5_stair
+    4300010: house_3zone_5_window
+    4300012: house_3zone_5
+    4300014: house_3zone_4_window
+    4300016: house_3zone_4
+    4300018: house_3zone_2_window
+    4300020: house_3zone_2
+    4300022: house_3zone_3
+    4300024: house_3zone_1
+    4300026: house_3zone_9
+    4300028: house_3zone_9_window
+    4300030: house_3zone_9_stair
+    4300032: house_3zone_8
+    4300034: house_3zone_8_window
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: color
+    second: {fileID: 2100000, guid: 945d1a7db699a0245aa50fbe04d22da9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glass
+    second: {fileID: 2100000, guid: bcbad97841b58744a9cd4997050e83d5, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 1
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

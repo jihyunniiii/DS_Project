@@ -1,0 +1,179 @@
+fileFormatVersion: 2
+guid: 7a325479a7b96214c8120b478e1a5973
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: bucket
+    100002: bucket_2
+    100004: bucket_3
+    100006: chair
+    100008: chair_2
+    100010: chair_3
+    100012: //RootNode
+    100014: label
+    100016: label_2
+    100018: label_3
+    100020: rag
+    100022: rag_2
+    100024: rag_3
+    100026: ring
+    100028: ring_2
+    100030: ring_3
+    100032: tribunes
+    100034: tribunes_2
+    100036: tribunes_3
+    400000: bucket
+    400002: bucket_2
+    400004: bucket_3
+    400006: chair
+    400008: chair_2
+    400010: chair_3
+    400012: //RootNode
+    400014: label
+    400016: label_2
+    400018: label_3
+    400020: rag
+    400022: rag_2
+    400024: rag_3
+    400026: ring
+    400028: ring_2
+    400030: ring_3
+    400032: tribunes
+    400034: tribunes_2
+    400036: tribunes_3
+    2100000: color
+    2300000: bucket
+    2300002: bucket_2
+    2300004: bucket_3
+    2300006: chair
+    2300008: chair_2
+    2300010: chair_3
+    2300012: label
+    2300014: label_2
+    2300016: label_3
+    2300018: rag
+    2300020: rag_2
+    2300022: rag_3
+    2300024: ring
+    2300026: ring_2
+    2300028: ring_3
+    2300030: tribunes
+    2300032: tribunes_2
+    2300034: tribunes_3
+    3300000: bucket
+    3300002: bucket_2
+    3300004: bucket_3
+    3300006: chair
+    3300008: chair_2
+    3300010: chair_3
+    3300012: label
+    3300014: label_2
+    3300016: label_3
+    3300018: rag
+    3300020: rag_2
+    3300022: rag_3
+    3300024: ring
+    3300026: ring_2
+    3300028: ring_3
+    3300030: tribunes
+    3300032: tribunes_2
+    3300034: tribunes_3
+    4300000: tribunes_3
+    4300002: label_3
+    4300004: chair_3
+    4300006: bucket_3
+    4300008: rag_3
+    4300010: ring_3
+    4300012: ring_2
+    4300014: rag_2
+    4300016: bucket_2
+    4300018: chair_2
+    4300020: label_2
+    4300022: tribunes_2
+    4300024: tribunes
+    4300026: label
+    4300028: chair
+    4300030: bucket
+    4300032: rag
+    4300034: ring
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 1
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

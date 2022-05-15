@@ -1,0 +1,169 @@
+fileFormatVersion: 2
+guid: 35b4ae06dc3aaa34cac668a3183a28a9
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: container_0
+    100002: container_1
+    100004: container_2
+    100006: container_3
+    100008: container_4
+    100010: container_door_0_L
+    100012: container_door_0_R
+    100014: container_door_1_L
+    100016: container_door_1_R
+    100018: container_door_2_L
+    100020: container_door_2_R
+    100022: container_door_3_L
+    100024: container_door_3_R
+    100026: container_door_4_L
+    100028: container_door_4_R
+    100030: //RootNode
+    400000: container_0
+    400002: container_1
+    400004: container_2
+    400006: container_3
+    400008: container_4
+    400010: container_door_0_L
+    400012: container_door_0_R
+    400014: container_door_1_L
+    400016: container_door_1_R
+    400018: container_door_2_L
+    400020: container_door_2_R
+    400022: container_door_3_L
+    400024: container_door_3_R
+    400026: container_door_4_L
+    400028: container_door_4_R
+    400030: //RootNode
+    2100000: color
+    2300000: container_0
+    2300002: container_1
+    2300004: container_2
+    2300006: container_3
+    2300008: container_4
+    2300010: container_door_0_L
+    2300012: container_door_0_R
+    2300014: container_door_1_L
+    2300016: container_door_1_R
+    2300018: container_door_2_L
+    2300020: container_door_2_R
+    2300022: container_door_3_L
+    2300024: container_door_3_R
+    2300026: container_door_4_L
+    2300028: container_door_4_R
+    3300000: container_0
+    3300002: container_1
+    3300004: container_2
+    3300006: container_3
+    3300008: container_4
+    3300010: container_door_0_L
+    3300012: container_door_0_R
+    3300014: container_door_1_L
+    3300016: container_door_1_R
+    3300018: container_door_2_L
+    3300020: container_door_2_R
+    3300022: container_door_3_L
+    3300024: container_door_3_R
+    3300026: container_door_4_L
+    3300028: container_door_4_R
+    4300000: container_0
+    4300002: container_door_0_R
+    4300004: container_door_0_L
+    4300006: container_4
+    4300008: container_door_4_L
+    4300010: container_door_4_R
+    4300012: container_1
+    4300014: container_door_1_R
+    4300016: container_door_1_L
+    4300018: container_2
+    4300020: container_door_2_L
+    4300022: container_door_2_R
+    4300024: container_3
+    4300026: container_door_3_L
+    4300028: container_door_3_R
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: color
+    second: {fileID: 2100000, guid: 5696682f912fc9c4da2b7414a4d5d39a, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 1
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
