@@ -39,5 +39,9 @@ public class GameManager : MonoBehaviour
         Application.Quit();   // 종료한다
 #endif
     }
+    public void GotoLobby()
+    {
+        SceneManager.LoadScene("MainLobby");
+    }
 
 }
