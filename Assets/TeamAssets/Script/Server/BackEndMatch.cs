@@ -31,8 +31,7 @@ public partial class BackEndMatch : MonoBehaviour
     void Start()
     {
         joinmatchserver();
-
-
+        Invoke("createMatch", 1f);
     }
 
     // Update is called once per frame
@@ -47,6 +46,21 @@ public partial class BackEndMatch : MonoBehaviour
         Backend.Match.OnJoinMatchMakingServer = (JoinChannelEventArgs args) =>
         {
             Debug.Log("매칭 서버 접속 완료");
+        };
+    }
+
+    void leaveMatch() {
+        Backend.Match.LeaveMatchMakingServer();
+        Backend.Match.OnLeaveMatchMakingServer = (LeaveChannelEventArgs args) =>
+        {
+            Debug.Log("매치 서버 종료, 로비로 돌아갑니다.");
+        };
+    }
+    void createMatch() {
+        Backend.Match.CreateMatchRoom();
+        Backend.Match.OnMatchMakingRoomCreate = (MatchMakingInteractionEventArgs args) =>
+        {
+            Debug.Log("대기방이 생성되었습니다.");
         };
     }
 }
