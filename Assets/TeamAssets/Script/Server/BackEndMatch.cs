@@ -18,7 +18,7 @@ public partial class BackEndMatch : MonoBehaviour
         public bool isSandBoxEnable;        // 샌드박스 모드 (AI매칭)
     }
     private static BackEndMatch instance = null; // 인스턴스
-
+    public GameObject loadingUI;
     private void Awake()
     {
         if (instance != null)
