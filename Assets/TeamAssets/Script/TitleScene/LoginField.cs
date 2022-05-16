@@ -10,6 +10,7 @@ using UnityEngine.UI;
 
 public class LoginField : MonoBehaviour
 {
+    private static LoginField instance;
     public GameObject id;
     public GameObject pw;
     public GameObject Certify_number;
@@ -26,6 +27,16 @@ public class LoginField : MonoBehaviour
 
     int ran;
     string email = "dgu.ac.kr";
+    void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(instance);
+        }
+        instance = this;
+        // 모든 씬에서 유지
+        DontDestroyOnLoad(this.gameObject);
+    }
     //public InputField userIndateInput;
     void Start()
     {
@@ -54,7 +65,7 @@ public class LoginField : MonoBehaviour
             if (bro.IsSuccess())
             {
                 Debug.Log("로그인에 성공했습니다");
-                //GameObject.FindWithTag("FadeController").GetComponent<FadeInOut>().FadeToNext();
+                GameObject.FindWithTag("FadeController").GetComponent<FadeInOut>().FadeToNext();
             }
         }
         else {
@@ -106,7 +117,7 @@ public class LoginField : MonoBehaviour
             if (ran == int.Parse(Certify_num.text) && Certify_num.text.Length != 0 && Major.text.Length != 0 && userNicknameInput.text.Length !=0)
             {
                 
-                BackendReturnObject bro = Backend.BMember.CustomSignUp(idInput.text, pwInput.text);
+                BackendReturnObject bro = Backend.BMember.CustomSignUp(idInput.text, pwInput.text, Major.text);
                 if (bro.IsSuccess())
                 {
                     Debug.Log("CustomSignUp : " + bro);
