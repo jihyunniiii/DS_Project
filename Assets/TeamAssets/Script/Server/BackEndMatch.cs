@@ -26,7 +26,6 @@ public partial class BackEndMatch : MonoBehaviour
     string mynickName;
     string myIndate;
     string indate;
-    
 
 
     private void Awake()
@@ -126,6 +125,7 @@ public partial class BackEndMatch : MonoBehaviour
 
     public void GoLobby() {
         Backend.Match.LeaveMatchRoom();
-        SceneManager.LoadScene("MainLobby");
+        Backend.Match.LeaveMatchMakingServer();
+        SceneManager.LoadScene("Title_DS");
     }
 }

@@ -45,6 +45,7 @@ public class LoginField : MonoBehaviour
         if (bro.IsSuccess())
         {
             Debug.Log("초기화 성공");
+            Backend.BMember.Logout();
         }
         else
         {
@@ -64,6 +65,9 @@ public class LoginField : MonoBehaviour
             BackendReturnObject bro = Backend.BMember.CustomLogin(idInput.text, pwInput.text);
             if (bro.IsSuccess())
             {
+                Param param = new Param();
+                param.Add("Major", Major.text);
+                Backend.GameData.Insert("Major", param);
                 Debug.Log("로그인에 성공했습니다");
                 GameObject.FindWithTag("FadeController").GetComponent<FadeInOut>().FadeToNext();
             }
