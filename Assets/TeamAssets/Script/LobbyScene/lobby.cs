@@ -87,8 +87,8 @@ public class lobby : MonoBehaviour
 
                 if (hit.collider.gameObject == GameRoomBox && SettingSound.activeSelf == false && UI.activeSelf == false && SettingUI.activeSelf == false && StoreUI.activeSelf == false && LanternBoardUI.activeSelf == false)
                 {
-                    Debug.Log("게임룸으로 이동합니다.");
-                    SceneManager.LoadScene("GameRoom");
+                    Debug.Log("게임 매칭 룸으로 이동합니다.");
+                    GameObject.FindWithTag("FadeController").GetComponent<FadeInOut>().FadeToNext();
                 }
 
                 if (hit.collider.gameObject == LanternBoardBox && SettingSound.activeSelf == false && UI.activeSelf == false && SettingUI.activeSelf == false && StoreUI.activeSelf == false)
@@ -229,7 +229,7 @@ public class lobby : MonoBehaviour
 
                 int x = Random.Range(0, 30);
                 int z = Random.Range(0, 5);
-                GameObject LanternClone = Instantiate(LanternOriginal, new Vector3(x, 5, z), Quaternion.identity);
+                GameObject LanternClone = Instantiate(LanternOriginal, new Vector3(x, 25, z), Quaternion.identity);
                 LanternClone.name = "LanternClone" + (LanternNum + 1);
                 LanternNum = LanternNum + 1;
             }
