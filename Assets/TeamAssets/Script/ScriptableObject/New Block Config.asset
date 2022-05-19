@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2aaadf25b8b281d4380ed27f911e9026, type: 3}
+  m_Script: {fileID: 11500000, guid: 124e6dfe7771d4a4dba6b9ce9bd37720, type: 3}
   m_Name: New Block Config
   m_EditorClassIdentifier: 
   dropSpeed: []

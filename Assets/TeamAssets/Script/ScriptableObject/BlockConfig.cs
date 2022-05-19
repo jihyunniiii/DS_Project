@@ -13,4 +13,3 @@ public class BlockConfig : ScriptableObject
         return Instantiate(explosion) as GameObject;
     }
 }
-
