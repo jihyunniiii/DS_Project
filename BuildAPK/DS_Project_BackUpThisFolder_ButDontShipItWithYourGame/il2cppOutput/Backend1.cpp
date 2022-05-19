@@ -1417,6 +1417,7 @@ IL2CPP_EXTERN_C const RuntimeMethod* U23Vtb_U23uo_mBA20260A55D1D2F9AE46CD3DA8FB2
 IL2CPP_EXTERN_C const RuntimeMethod* U23Vtb_U23vn_m19AA3DA389F52A165F6BD996EDB2DD77479A5440_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* U23Vtb_U23wAb_m5C0CC70C6810EB2A422075E1530FF770DA697DBD_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* U23Vtb_U23wn_mCE2DDC2231ED40BE31F3123812659AD5F953D7DF_RuntimeMethod_var;
+IL2CPP_EXTERN_C const RuntimeMethod* U23Vtb_U23xn_m7E716817C9C426DA3D8FC7F9F7063496379390B8_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* U23WR_U23RR_m1D44EF1D036C733D0A3BB1DFEE8BA48C7D331BF0_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* U23ep_U23bp_m2781811C99FD958989ED1604619F899843E82B7E_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* U23gp_U23dp_m4244DF4DB393D0730194D1B0FFD4AA9DE7793BEE_RuntimeMethod_var;
@@ -23678,6 +23679,8 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U23Vtb_U23fo_mC3ADA460A60E6C2D81A7C3CA90
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U23Vtb_U23go_m6BB252B0779E80CF2FCDB229FCF2EF9BD5ED92D3 (U23Vtb_t9918034BCE92C3595009FF68B2FC3F139C496167 * __this, const RuntimeMethod* method);
 // System.Void #xl.#Vtb::#ho()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U23Vtb_U23ho_m60C93972864FF532DBB294C5D31256DA00C3C62B (U23Vtb_t9918034BCE92C3595009FF68B2FC3F139C496167 * __this, const RuntimeMethod* method);
+// System.Void #xl.#Vtb::#io()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U23Vtb_U23io_mD7E423228D70C2B153D11575B4154ADF3F4EE8EE (U23Vtb_t9918034BCE92C3595009FF68B2FC3F139C496167 * __this, const RuntimeMethod* method);
 // System.Void BackEnd.Tcp.Latency::#Ul()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Latency_U23Ul_m2FE11671BA4095B573EA17C3281C1CA7E754DEA1 (Latency_t00A44708DD7B8DDA4B30C48D1707EFC2AB86602E * __this, const RuntimeMethod* method);
 // System.Void #xl.#Vtb::#kn()
@@ -23741,6 +23744,8 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U23Vtb_U23un_m146404110A0713D1EA8BBEBCC9
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U23Vtb_U23vn_m19AA3DA389F52A165F6BD996EDB2DD77479A5440 (U23Vtb_t9918034BCE92C3595009FF68B2FC3F139C496167 * __this, const RuntimeMethod* method);
 // System.Void #xl.#Vtb::#wn()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U23Vtb_U23wn_mCE2DDC2231ED40BE31F3123812659AD5F953D7DF (U23Vtb_t9918034BCE92C3595009FF68B2FC3F139C496167 * __this, const RuntimeMethod* method);
+// System.Void #xl.#Vtb::#xn()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U23Vtb_U23xn_m7E716817C9C426DA3D8FC7F9F7063496379390B8 (U23Vtb_t9918034BCE92C3595009FF68B2FC3F139C496167 * __this, const RuntimeMethod* method);
 // System.TimeSpan System.DateTime::op_Subtraction(System.DateTime,System.DateTime)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR TimeSpan_t4F6A0E13E703B65365CFCAB58E05EE0AF3EE6203  DateTime_op_Subtraction_m67E0BD5004FEDD3A704BC74B9DC858C9BCED4DF2 (DateTime_tEAF2CD16E071DF5441F40822E4CFE880E5245405  ___d10, DateTime_tEAF2CD16E071DF5441F40822E4CFE880E5245405  ___d21, const RuntimeMethod* method);
 // System.Double System.TimeSpan::get_TotalMilliseconds()
@@ -45153,6 +45158,83 @@ IL_0037:
 		return;
 	}
 }
+// System.Void #xl.#Vtb::#xn()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U23Vtb_U23xn_m7E716817C9C426DA3D8FC7F9F7063496379390B8 (U23Vtb_t9918034BCE92C3595009FF68B2FC3F139C496167 * __this, const RuntimeMethod* method)
+{
+	RuntimeObject * V_0 = NULL;
+	bool V_1 = false;
+	Exception_t * __last_unhandled_exception = 0;
+	il2cpp::utils::ExceptionSupportStack<int32_t, 1> __leave_targets;
+	{
+		RuntimeObject * L_0 = __this->get_U23Wl_0();
+		V_0 = L_0;
+		V_1 = (bool)0;
+	}
+
+IL_0009:
+	try
+	{ // begin try (depth: 1)
+		{
+			RuntimeObject * L_1 = V_0;
+			Monitor_Enter_mBEB6CC84184B46F26375EC3FC8921D16E48EA4C4(L_1, (bool*)(&V_1), /*hidden argument*/NULL);
+			int32_t L_2 = __this->get_U237l_11();
+			if ((((int32_t)L_2) == ((int32_t)2)))
+			{
+				goto IL_0025;
+			}
+		}
+
+IL_001a:
+		{
+			Exception_t * L_3 = (Exception_t *)il2cpp_codegen_object_new(((RuntimeClass*)il2cpp_codegen_initialize_runtime_metadata_inline((uintptr_t*)&Exception_t_il2cpp_TypeInfo_var)));
+			Exception__ctor_m8ECDE8ACA7F2E0EF1144BD1200FB5DB2870B5F11(L_3, ((String_t*)il2cpp_codegen_initialize_runtime_metadata_inline((uintptr_t*)&_stringLiteral4836B35EB8B11051A4BFF567850E57F4E97909A9)), /*hidden argument*/NULL);
+			IL2CPP_RAISE_MANAGED_EXCEPTION(L_3, ((RuntimeMethod*)il2cpp_codegen_initialize_runtime_metadata_inline((uintptr_t*)&U23Vtb_U23xn_m7E716817C9C426DA3D8FC7F9F7063496379390B8_RuntimeMethod_var)));
+		}
+
+IL_0025:
+		{
+			U23Vtb_U23io_mD7E423228D70C2B153D11575B4154ADF3F4EE8EE(__this, /*hidden argument*/NULL);
+			IL2CPP_LEAVE(0x37, FINALLY_002d);
+		}
+	} // end try (depth: 1)
+	catch(Il2CppExceptionWrapper& e)
+	{
+		__last_unhandled_exception = (Exception_t *)e.ex;
+		goto FINALLY_002d;
+	}
+
+FINALLY_002d:
+	{ // begin finally (depth: 1)
+		{
+			bool L_4 = V_1;
+			if (!L_4)
+			{
+				goto IL_0036;
+			}
+		}
+
+IL_0030:
+		{
+			RuntimeObject * L_5 = V_0;
+			Monitor_Exit_mA776B403DA88AC77CDEEF67AB9F0D0E77ABD254A(L_5, /*hidden argument*/NULL);
+		}
+
+IL_0036:
+		{
+			IL2CPP_END_FINALLY(45)
+		}
+	} // end finally (depth: 1)
+	IL2CPP_CLEANUP(45)
+	{
+		IL2CPP_RETHROW_IF_UNHANDLED(Exception_t *)
+		IL2CPP_JUMP_TBL(0x37, IL_0037)
+	}
+
+IL_0037:
+	{
+		return;
+	}
+}
 // System.Void #xl.#Vtb::#Hn()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U23Vtb_U23Hn_m56AA13C69CDEA1843F7F797C1E7AF18AC81DEA35 (U23Vtb_t9918034BCE92C3595009FF68B2FC3F139C496167 * __this, const RuntimeMethod* method)
 {
@@ -45950,6 +46032,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U23Vtb_U23Sn_mDBE7EF887E0086D971A62F8EB9
 {
 	{
 		U23Vtb_U23wn_mCE2DDC2231ED40BE31F3123812659AD5F953D7DF(__this, /*hidden argument*/NULL);
+		return;
+	}
+}
+// System.Void #xl.#Vtb::#Tn()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U23Vtb_U23Tn_m840C2592CC75A037B2B61AD9161FA18CC4F41183 (U23Vtb_t9918034BCE92C3595009FF68B2FC3F139C496167 * __this, const RuntimeMethod* method)
+{
+	{
+		U23Vtb_U23xn_m7E716817C9C426DA3D8FC7F9F7063496379390B8(__this, /*hidden argument*/NULL);
 		return;
 	}
 }
@@ -47029,6 +47119,31 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U23Vtb_U23ho_m60C93972864FF532DBB294C5D3
 		U23Kq_t287680FF334638269EEE10A34C7F6A2B83F4508E * L_2 = V_0;
 		NullCheck(L_2);
 		U23Kq_U23or_m29FDFD7CF08E74C3B266FD81636E5166302F53DC(L_2, ((int32_t)131), /*hidden argument*/NULL);
+		U23Kq_t287680FF334638269EEE10A34C7F6A2B83F4508E * L_3 = V_0;
+		U23Vtb_U23ln_mCA303A97FB0119BD13D00B192EC76F6713288752(__this, L_3, /*hidden argument*/NULL);
+		return;
+	}
+}
+// System.Void #xl.#Vtb::#io()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U23Vtb_U23io_mD7E423228D70C2B153D11575B4154ADF3F4EE8EE (U23Vtb_t9918034BCE92C3595009FF68B2FC3F139C496167 * __this, const RuntimeMethod* method)
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&U23Kq_t287680FF334638269EEE10A34C7F6A2B83F4508E_il2cpp_TypeInfo_var);
+		s_Il2CppMethodInitialized = true;
+	}
+	U23Kq_t287680FF334638269EEE10A34C7F6A2B83F4508E * V_0 = NULL;
+	{
+		U23Kq_t287680FF334638269EEE10A34C7F6A2B83F4508E * L_0 = (U23Kq_t287680FF334638269EEE10A34C7F6A2B83F4508E *)il2cpp_codegen_object_new(U23Kq_t287680FF334638269EEE10A34C7F6A2B83F4508E_il2cpp_TypeInfo_var);
+		U23Kq__ctor_m2588ED3E298C678BBFDC650CEA3FA5FA5EC95609(L_0, /*hidden argument*/NULL);
+		V_0 = L_0;
+		U23Kq_t287680FF334638269EEE10A34C7F6A2B83F4508E * L_1 = V_0;
+		NullCheck(L_1);
+		U23Kq_U23or_m3D9C846C8483366B3AAEC344CFC4BB9CF819DE04(L_1, 3, /*hidden argument*/NULL);
+		U23Kq_t287680FF334638269EEE10A34C7F6A2B83F4508E * L_2 = V_0;
+		NullCheck(L_2);
+		U23Kq_U23or_m29FDFD7CF08E74C3B266FD81636E5166302F53DC(L_2, ((int32_t)133), /*hidden argument*/NULL);
 		U23Kq_t287680FF334638269EEE10A34C7F6A2B83F4508E * L_3 = V_0;
 		U23Vtb_U23ln_mCA303A97FB0119BD13D00B192EC76F6713288752(__this, L_3, /*hidden argument*/NULL);
 		return;

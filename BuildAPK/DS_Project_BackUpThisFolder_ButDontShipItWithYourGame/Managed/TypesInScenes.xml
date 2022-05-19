@@ -45,15 +45,36 @@
 		<type fullname="UnityEngine.Collider" preserve="nothing"/>
 		<type fullname="UnityEngine.TerrainCollider" preserve="nothing"/>
 		<type fullname="UnityEngine.Terrain" preserve="nothing"/>
+		<type fullname="UnityEngine.MeshFilter" preserve="nothing"/>
 		<type fullname="UnityEngine.SkinnedMeshRenderer" preserve="nothing"/>
+		<type fullname="UnityEngine.MeshRenderer" preserve="nothing"/>
+		<type fullname="UnityEngine.AudioSource" preserve="nothing"/>
+		<type fullname="UnityEngine.Rigidbody" preserve="nothing"/>
+		<type fullname="UnityEngine.MeshCollider" preserve="nothing"/>
+		<type fullname="UnityEngine.CapsuleCollider" preserve="nothing"/>
+		<type fullname="UnityEngine.BoxCollider" preserve="nothing"/>
+		<type fullname="UnityEngine.Avatar" preserve="nothing"/>
 		<type fullname="UnityEngine.Mesh" preserve="nothing"/>
+		<type fullname="UnityEngine.AudioClip" preserve="nothing"/>
+		<type fullname="UnityEngine.ParticleSystem" preserve="nothing"/>
+		<type fullname="UnityEngine.ParticleSystemRenderer" preserve="nothing"/>
+		<type fullname="UnityEngine.SphereCollider" preserve="nothing"/>
 	</assembly>
 	<assembly fullname="Assembly-CSharp">
 		<type fullname="BackEndMatch" preserve="nothing"/>
+		<type fullname="BlockConfig" preserve="nothing"/>
+		<type fullname="CameraMove" preserve="nothing"/>
 		<type fullname="CharacterSet" preserve="nothing"/>
 		<type fullname="FadeInOut" preserve="nothing"/>
+		<type fullname="FloorControl" preserve="nothing"/>
+		<type fullname="GameManager" preserve="nothing"/>
+		<type fullname="HexTileMapTUT" preserve="nothing"/>
 		<type fullname="LoginField" preserve="nothing"/>
+		<type fullname="Ninez.Effect.ParticleAutoDestroy" preserve="nothing"/>
+		<type fullname="SpawnLotus" preserve="nothing"/>
 		<type fullname="StartLogo" preserve="nothing"/>
+		<type fullname="gameover" preserve="nothing"/>
+		<type fullname="lobby" preserve="nothing"/>
 		<type fullname="moveObject" preserve="nothing"/>
 		<type fullname="testStartServer" preserve="nothing"/>
 	</assembly>
@@ -63,18 +84,30 @@
 	<assembly fullname="Unity.TextMeshPro">
 		<type fullname="TMPro.TMP_ColorGradient" preserve="nothing"/>
 		<type fullname="TMPro.TMP_FontAsset" preserve="nothing"/>
+		<type fullname="TMPro.TMP_InputField" preserve="nothing"/>
 		<type fullname="TMPro.TMP_Settings" preserve="nothing"/>
 		<type fullname="TMPro.TMP_SpriteAsset" preserve="nothing"/>
 		<type fullname="TMPro.TMP_StyleSheet" preserve="nothing"/>
+		<type fullname="TMPro.TextMeshProUGUI" preserve="nothing"/>
 	</assembly>
 	<assembly fullname="UnityEngine.UI">
 		<type fullname="UnityEngine.EventSystems.EventSystem" preserve="nothing"/>
 		<type fullname="UnityEngine.EventSystems.StandaloneInputModule" preserve="nothing"/>
 		<type fullname="UnityEngine.UI.Button" preserve="nothing"/>
 		<type fullname="UnityEngine.UI.CanvasScaler" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.ContentSizeFitter" preserve="nothing"/>
 		<type fullname="UnityEngine.UI.GraphicRaycaster" preserve="nothing"/>
 		<type fullname="UnityEngine.UI.Image" preserve="nothing"/>
 		<type fullname="UnityEngine.UI.InputField" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.LayoutElement" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.Mask" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.RectMask2D" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.ScrollRect" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.Scrollbar" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.Slider" preserve="nothing"/>
 		<type fullname="UnityEngine.UI.Text" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.Toggle" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.ToggleGroup" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.VerticalLayoutGroup" preserve="nothing"/>
 	</assembly>
 </linker>

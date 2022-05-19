@@ -6,6 +6,7 @@ using BackEnd;
 using BackEnd.Tcp;
 using System.Linq;
 using LitJson;
+using UnityEngine.SceneManagement;
 
 using static BackEnd.SendQueue;
 
@@ -122,5 +123,9 @@ public partial class BackEndMatch : MonoBehaviour
             }
         };
     }
-   
+
+    public void GoLobby() {
+        Backend.Match.LeaveMatchRoom();
+        SceneManager.LoadScene("MainLobby");
+    }
 }
