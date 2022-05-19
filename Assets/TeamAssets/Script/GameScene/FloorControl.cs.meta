@@ -4,7 +4,7 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - newBlockConfig: {fileID: 11400000, guid: d141f4ea530b57041b698533a34e540e, type: 2}
+  - newBlockConfig: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
