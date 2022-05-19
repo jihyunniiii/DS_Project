@@ -112,3 +112,9 @@ public class HexTileMapTUT : MonoBehaviour
         }
     }
 }
+/*
+ 캐릭터 오브젝트 - 상대좌표 x,z그대로 사용 y는 발부분 
+vector3 pos = new vector3(x,y,z);
+ temp.trasfrom. =pos;
+
+ */
