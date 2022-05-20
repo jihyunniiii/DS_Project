@@ -19,6 +19,7 @@ public class LoginField : MonoBehaviour
     public GameObject login;
     public GameObject nicknametext;
     public GameObject Majorobject;
+    public GameObject exitobject;
     public InputField idInput;
     public InputField pwInput;
     public InputField Certify_num;
@@ -45,7 +46,6 @@ public class LoginField : MonoBehaviour
         if (bro.IsSuccess())
         {
             Debug.Log("초기화 성공");
-            Backend.BMember.Logout();
         }
         else
         {
@@ -96,6 +96,7 @@ public class LoginField : MonoBehaviour
                 login.SetActive(false);
                 nicknametext.SetActive(true);
                 Majorobject.SetActive(true);
+                exitobject.SetActive(false);
                 ran = Random.Range(100000, 999999);
 
                 MailMessage mail = new MailMessage();
@@ -136,6 +137,7 @@ public class LoginField : MonoBehaviour
                     login.SetActive(true);
                     nicknametext.SetActive(false);
                     Majorobject.SetActive(false);
+                    exitobject.SetActive(true);
                 }
             }
             else {
@@ -148,6 +150,10 @@ public class LoginField : MonoBehaviour
     }
     public void LogOut()
     {
-        Debug.Log(Backend.BMember.Logout());
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit(); // 어플리케이션 종료
+#endif
     }
 }

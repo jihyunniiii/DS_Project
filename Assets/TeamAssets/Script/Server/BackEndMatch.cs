@@ -7,7 +7,6 @@ using BackEnd.Tcp;
 using System.Linq;
 using LitJson;
 using UnityEngine.SceneManagement;
-
 using static BackEnd.SendQueue;
 
 
@@ -35,6 +34,7 @@ public partial class BackEndMatch : MonoBehaviour
             Destroy(instance);
         }
         instance = this;
+        DontDestroyOnLoad(this.gameObject);
     }
     // Start is called before the first frame update
     void Start()
@@ -46,7 +46,16 @@ public partial class BackEndMatch : MonoBehaviour
         checkBackEnd();
         
     }
+    public static BackEndMatch GetInstance()
+    {
+        if (!instance)
+        {
+            //Debug.LogError("BackEndMatchManager 인스턴스가 존재하지 않습니다.");
+            return null;
+        }
 
+        return instance;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -126,6 +135,7 @@ public partial class BackEndMatch : MonoBehaviour
     public void GoLobby() {
         Backend.Match.LeaveMatchRoom();
         Backend.Match.LeaveMatchMakingServer();
+        Backend.BMember.Logout();
         SceneManager.LoadScene("Title_DS");
     }
 }

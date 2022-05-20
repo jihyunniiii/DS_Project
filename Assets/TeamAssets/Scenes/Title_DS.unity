@@ -263,7 +263,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7320712326219552358, guid: b5f65bf0fd2ad4d4c8bf32493bf878ba, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5f65bf0fd2ad4d4c8bf32493bf878ba, type: 3}
@@ -1379,12 +1379,12 @@ GameObject:
   - component: {fileID: 685042457}
   - component: {fileID: 685042456}
   m_Layer: 5
-  m_Name: Button(join)
+  m_Name: Button(Exit)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &685042455
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1402,7 +1402,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8.48024, y: -218.72006}
+  m_AnchoredPosition: {x: 11, y: -218.72006}
   m_SizeDelta: {x: 192.54, y: 78.84}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &685042456
@@ -1448,7 +1448,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 685042457}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 826597559}
+        m_TargetAssemblyTypeName: LoginField, Assembly-CSharp
+        m_MethodName: LogOut
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &685042457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1747,6 +1759,7 @@ MonoBehaviour:
   login: {fileID: 1985344257}
   nicknametext: {fileID: 235858105}
   Majorobject: {fileID: 526321755}
+  exitobject: {fileID: 685042454}
   idInput: {fileID: 1233904436}
   pwInput: {fileID: 1231351332}
   Certify_num: {fileID: 220625379}
@@ -2803,7 +2816,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Guest Login
+  m_Text: Exit
 --- !u!222 &1563849131
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3441,7 +3454,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -97, y: -218.72006}
+  m_AnchoredPosition: {x: -209, y: -218.72006}
   m_SizeDelta: {x: 199.81, y: 78.84}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1985344259
