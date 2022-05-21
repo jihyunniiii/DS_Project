@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class CharacterSet : MonoBehaviour
+using Unity.Netcode;
+public class CharacterSet : NetworkBehaviour
 {
     private enum ControlMode { 
         Tank, 
         Direct
     }
+    /*[SerializeField]
+    private float walkSpeed = 1f;*/
+    [SerializeField]
+    private Vector2 defaultPositionRange = new Vector2(-4, 4);
 
     [SerializeField] private float moveSpeed = 2;
     [SerializeField] private float turnSpeed = 200;
@@ -34,13 +38,18 @@ public class CharacterSet : MonoBehaviour
     private bool jumpInput = false;
 
     private bool isGrounded;
-
+    private Vector3 ServerVector3 = Vector3.zero;
+    Quaternion Serverquaternion;
     private List<Collider> collisions = new List<Collider>();
 
     private void Awake()
     {
         if (!animator) { gameObject.GetComponent<Animator>(); }
         if (!rigidBody) { gameObject.GetComponent<Animator>(); }
+    }
+    void Start()
+    {
+        transform.position = new Vector3(Random.Range(defaultPositionRange.x, defaultPositionRange.y), 0, Random.Range(defaultPositionRange.x, defaultPositionRange.y));
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -110,24 +119,35 @@ public class CharacterSet : MonoBehaviour
     private void FixedUpdate()
     {
         animator.SetBool("Grounded", isGrounded);
-
-        switch (controlMode)
+        if (IsServer)
         {
-            case ControlMode.Direct:
-               DirectUpdate();
-                break;
+            UpdateServer();
+        }
+        if (IsClient)
+        {
+            switch (controlMode)
+            {
+                case ControlMode.Direct:
+                    DirectUpdate();
+                    break;
 
-            case ControlMode.Tank:
-                TankUpdate();
-                break;
+                case ControlMode.Tank:
+                    TankUpdate();
+                    break;
 
-            default:
-                Debug.LogError("Unsupported state");
-                break;
+                default:
+                    Debug.LogError("Unsupported state");
+                    break;
+            }
         }
 
         wasGrounded = isGrounded;
         jumpInput = false;
+    }
+    private void UpdateServer()
+    {
+        transform.rotation = Serverquaternion;
+        transform.position += ServerVector3;
     }
 
     private void TankUpdate()
@@ -184,14 +204,22 @@ public class CharacterSet : MonoBehaviour
         {
             currentDirection = Vector3.Slerp(currentDirection, direction, Time.deltaTime * interpolation);
 
-            transform.rotation = Quaternion.LookRotation(currentDirection);
-            transform.position += currentDirection * moveSpeed * Time.deltaTime;
-
+           // transform.rotation = Quaternion.LookRotation(currentDirection);
+            //transform.position += currentDirection * moveSpeed * Time.deltaTime;
+            UpdateClientPositionServerRpc(Quaternion.LookRotation(currentDirection), currentDirection * moveSpeed * Time.deltaTime);
             animator.SetFloat("MoveSpeed", direction.magnitude);
         }
 
         JumpingAndLanding();
     }
+
+    [ServerRpc]
+    private void UpdateClientPositionServerRpc(Quaternion quaternion, Vector3 vector3)
+    {
+        Serverquaternion = quaternion;
+        ServerVector3 = vector3;
+    }
+
 
     private void JumpingAndLanding()
     {

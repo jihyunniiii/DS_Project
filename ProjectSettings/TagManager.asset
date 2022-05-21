@@ -12,6 +12,7 @@ TagManager:
   - Hex5
   - Hex
   - lotus
+  - UIcamera
   layers:
   - Default
   - TransparentFX
