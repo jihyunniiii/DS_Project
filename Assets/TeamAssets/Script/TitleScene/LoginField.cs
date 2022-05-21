@@ -65,9 +65,6 @@ public class LoginField : MonoBehaviour
             BackendReturnObject bro = Backend.BMember.CustomLogin(idInput.text, pwInput.text);
             if (bro.IsSuccess())
             {
-                Param param = new Param();
-                param.Add("Major", Major.text);
-                Backend.GameData.Insert("Major", param);
                 Debug.Log("로그인에 성공했습니다");
                 GameObject.FindWithTag("FadeController").GetComponent<FadeInOut>().FadeToNext();
             }
@@ -129,6 +126,13 @@ public class LoginField : MonoBehaviour
                     Debug.Log("닉네임 업데이트" + Backend.BMember.UpdateNickname(userNicknameInput.text));
                     Backend.BMember.UpdateCustomEmail(idInput.text);
                     Debug.Log("회원가입에 성공했습니다");
+                    Backend.BMember.CustomLogin(idInput.text, pwInput.text);
+                    Param param = new Param();
+                    param.Add("재화", 0);
+                    param.Add("연등", 0);
+                    param.Add("전공", Major.text);
+                    Backend.GameData.Insert("UserInfo", param);
+                    Backend.BMember.Logout();
                     id.SetActive(true);
                     pw.SetActive(true);
                     Certify_number.SetActive(false);
