@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
-public class CharacterSet : NetworkBehaviour
+public class charactertemp : MonoBehaviour
 {
-    private enum ControlMode { 
-        Tank, 
+    private enum ControlMode
+    {
+        Tank,
         Direct
     }
     /*[SerializeField]
@@ -14,7 +15,7 @@ public class CharacterSet : NetworkBehaviour
     private Vector2 defaultPositionRange = new Vector2(-4, 4);
 
     [SerializeField] private float moveSpeed = 2;
-   
+    [SerializeField] private float turnSpeed = 200;
     [SerializeField] private float jumpForce = 4;
 
     [SerializeField] private Animator animator = null;
@@ -27,7 +28,8 @@ public class CharacterSet : NetworkBehaviour
 
     private readonly float interpolation = 10;
     private readonly float walkScale = 0.33f;
-   
+    private readonly float backwardsWalkScale = 0.16f;
+    private readonly float backwardRunScale = 0.66f;
 
     private bool wasGrounded;
     private Vector3 currentDirection = Vector3.zero;
@@ -39,7 +41,6 @@ public class CharacterSet : NetworkBehaviour
     private bool isGrounded;
     private Vector3 ServerVector3 = Vector3.zero;
     Quaternion Serverquaternion;
-    //private Vector3 ServerJump = Vector3.zero;
     private List<Collider> collisions = new List<Collider>();
 
     private void Awake()
@@ -66,7 +67,7 @@ public class CharacterSet : NetworkBehaviour
             }
         }
     }
-   private void OnCollisionStay(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         ContactPoint[] contactPoints = collision.contacts;
         bool validSurfaceNormal = false;
@@ -77,7 +78,7 @@ public class CharacterSet : NetworkBehaviour
                 validSurfaceNormal = true; break;
             }
         }
-       
+
         if (validSurfaceNormal)
         {
             isGrounded = true;
@@ -88,7 +89,7 @@ public class CharacterSet : NetworkBehaviour
         }
         else
         {
-            
+
             if (collisions.Contains(collision.collider))
             {
                 collisions.Remove(collision.collider);
@@ -99,54 +100,79 @@ public class CharacterSet : NetworkBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        
+
         if (collisions.Contains(collision.collider))
         {
             collisions.Remove(collision.collider);
         }
-       
+
         if (collisions.Count >= 0) { isGrounded = false; }
     }
 
     private void Update()
     {
-        
+        if (!jumpInput && Input.GetKey(KeyCode.Space))
+        {
+            jumpInput = true;
+        }
     }
 
     private void FixedUpdate()
     {
         animator.SetBool("Grounded", isGrounded);
-        if (IsServer)
-        {
-            UpdateServer();
-        }
-        if (IsClient)
-        {
-            if (!jumpInput && Input.GetKey(KeyCode.Space))
-            {
-                jumpInput = true;
-            }
+        
+        
             switch (controlMode)
             {
                 case ControlMode.Direct:
                     DirectUpdate();
                     break;
 
+                case ControlMode.Tank:
+                    TankUpdate();
+                    break;
+
                 default:
                     Debug.LogError("Unsupported state");
                     break;
-            } 
-            wasGrounded = isGrounded;
-            jumpInput = false;
-        }
+            }
+        
 
-       
+        wasGrounded = isGrounded;
+        jumpInput = false;
     }
     private void UpdateServer()
     {
         transform.rotation = Serverquaternion;
         transform.position += ServerVector3;
-       
+    }
+
+    private void TankUpdate()
+    {
+        float v = Input.GetAxis("Vertical");
+        float h = Input.GetAxis("Horizontal");
+
+        bool walk = Input.GetKey(KeyCode.LeftShift);
+
+        if (v < 0)
+        {
+            if (walk) { v *= backwardsWalkScale; }
+            else { v *= backwardRunScale; }
+        }
+        else if (walk)
+        {
+            v *= walkScale;
+        }
+
+        currentV = Mathf.Lerp(currentV, v, Time.deltaTime * interpolation);
+        currentH = Mathf.Lerp(currentH, h, Time.deltaTime * interpolation);
+
+        transform.position += transform.forward * currentV * moveSpeed * Time.deltaTime;
+        transform.Rotate(0, currentH * turnSpeed * Time.deltaTime, 0);
+
+        animator.SetFloat("MoveSpeed", currentV);
+
+        JumpingAndLanding();
     }
 
     private void DirectUpdate()
@@ -175,28 +201,29 @@ public class CharacterSet : NetworkBehaviour
         {
             currentDirection = Vector3.Slerp(currentDirection, direction, Time.deltaTime * interpolation);
 
-           // transform.rotation = Quaternion.LookRotation(currentDirection);
-            //transform.position += currentDirection * moveSpeed * Time.deltaTime;
-            UpdateClientPositionServerRpc(Quaternion.LookRotation(currentDirection), currentDirection * moveSpeed * Time.deltaTime);
+             transform.rotation = Quaternion.LookRotation(currentDirection);
+            transform.position += currentDirection * moveSpeed * Time.deltaTime;
+           // UpdateClientPositionServerRpc(Quaternion.LookRotation(currentDirection), currentDirection * moveSpeed * Time.deltaTime);
             animator.SetFloat("MoveSpeed", direction.magnitude);
         }
 
         JumpingAndLanding();
-
     }
 
-    [ServerRpc]
+    /*[ServerRpc]
     private void UpdateClientPositionServerRpc(Quaternion quaternion, Vector3 vector3)
     {
         Serverquaternion = quaternion;
         ServerVector3 = vector3;
-    }
+    }*/
+
 
     private void JumpingAndLanding()
     {
         bool jumpCooldownOver = (Time.time - jumpTimeStamp) >= minJumpInterval;
 
-        if (isGrounded && rigidBody.velocity.y < -1) { 
+        if (isGrounded && rigidBody.velocity.y < -1)
+        {
             isGrounded = false;
         }
 
