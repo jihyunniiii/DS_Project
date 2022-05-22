@@ -993,6 +993,7 @@ GameObject:
   - component: {fileID: 5760314873270977819}
   - component: {fileID: -7467700400803603699}
   - component: {fileID: 2612112710876770145}
+  - component: {fileID: 3002118392218968076}
   m_Layer: 0
   m_Name: tempCharacter
   m_TagString: Untagged
@@ -1079,14 +1080,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5646c127d60b4d240963218bdb161cf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 1
   defaultPositionRange: {x: -4, y: 4}
   moveSpeed: 2
-  turnSpeed: 200
   jumpForce: 4
   animator: {fileID: 7338105055660752622}
   rigidBody: {fileID: 7338105055660752624}
   controlMode: 1
+  networkPositionDirection:
+    m_InternalValue: {x: 0, y: 0, z: 0}
+  networkRotationDirection:
+    m_InternalValue: {x: 0, y: 0, z: 0, w: 0}
+  networkPlayerState:
+    m_InternalValue: 0
 --- !u!114 &-4964201501985293191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1155,6 +1160,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3002118392218968076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7338105055660752626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 7338105055660752622}
 --- !u!1 &7338105055698777761
 GameObject:
   m_ObjectHideFlags: 0

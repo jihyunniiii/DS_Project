@@ -4,8 +4,9 @@ using UnityEngine;
 using Unity.Netcode;
 public class CharacterSet : NetworkBehaviour
 {
-    private enum ControlMode { 
-        Tank, 
+    private enum ControlMode
+    {
+        Tank,
         Direct
     }
     /*[SerializeField]
@@ -14,7 +15,7 @@ public class CharacterSet : NetworkBehaviour
     private Vector2 defaultPositionRange = new Vector2(-4, 4);
 
     [SerializeField] private float moveSpeed = 2;
-   
+
     [SerializeField] private float jumpForce = 4;
 
     [SerializeField] private Animator animator = null;
@@ -27,7 +28,7 @@ public class CharacterSet : NetworkBehaviour
 
     private readonly float interpolation = 10;
     private readonly float walkScale = 0.33f;
-   
+
 
     private bool wasGrounded;
     private Vector3 currentDirection = Vector3.zero;
@@ -66,7 +67,7 @@ public class CharacterSet : NetworkBehaviour
             }
         }
     }
-   private void OnCollisionStay(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         ContactPoint[] contactPoints = collision.contacts;
         bool validSurfaceNormal = false;
@@ -77,7 +78,7 @@ public class CharacterSet : NetworkBehaviour
                 validSurfaceNormal = true; break;
             }
         }
-       
+
         if (validSurfaceNormal)
         {
             isGrounded = true;
@@ -88,7 +89,7 @@ public class CharacterSet : NetworkBehaviour
         }
         else
         {
-            
+
             if (collisions.Contains(collision.collider))
             {
                 collisions.Remove(collision.collider);
@@ -99,18 +100,18 @@ public class CharacterSet : NetworkBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        
+
         if (collisions.Contains(collision.collider))
         {
             collisions.Remove(collision.collider);
         }
-       
+
         if (collisions.Count >= 0) { isGrounded = false; }
     }
 
     private void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
@@ -120,7 +121,7 @@ public class CharacterSet : NetworkBehaviour
         {
             UpdateServer();
         }
-        if (IsClient)
+        if (IsClient && IsOwner)
         {
             if (!jumpInput && Input.GetKey(KeyCode.Space))
             {
@@ -135,18 +136,18 @@ public class CharacterSet : NetworkBehaviour
                 default:
                     Debug.LogError("Unsupported state");
                     break;
-            } 
+            }
             wasGrounded = isGrounded;
             jumpInput = false;
         }
 
-       
+
     }
     private void UpdateServer()
     {
         transform.rotation = Serverquaternion;
         transform.position += ServerVector3;
-       
+
     }
 
     private void DirectUpdate()
@@ -175,7 +176,7 @@ public class CharacterSet : NetworkBehaviour
         {
             currentDirection = Vector3.Slerp(currentDirection, direction, Time.deltaTime * interpolation);
 
-           // transform.rotation = Quaternion.LookRotation(currentDirection);
+            // transform.rotation = Quaternion.LookRotation(currentDirection);
             //transform.position += currentDirection * moveSpeed * Time.deltaTime;
             UpdateClientPositionServerRpc(Quaternion.LookRotation(currentDirection), currentDirection * moveSpeed * Time.deltaTime);
             animator.SetFloat("MoveSpeed", direction.magnitude);
@@ -196,7 +197,8 @@ public class CharacterSet : NetworkBehaviour
     {
         bool jumpCooldownOver = (Time.time - jumpTimeStamp) >= minJumpInterval;
 
-        if (isGrounded && rigidBody.velocity.y < -1) { 
+        if (isGrounded && rigidBody.velocity.y < -1)
+        {
             isGrounded = false;
         }
 
