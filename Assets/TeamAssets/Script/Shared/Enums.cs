@@ -5,4 +5,6 @@
     Run,
     Punch,
     ReverseWalk,
+    Jump,
+    Ground
 }
