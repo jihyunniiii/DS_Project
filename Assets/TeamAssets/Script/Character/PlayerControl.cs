@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -7,12 +8,11 @@ public class PlayerControl : NetworkBehaviour
     #region Variables
     //basic variables about the movements
     [SerializeField]
-    float speed = 5f;
+    float speed = 2.0f;
     [SerializeField]
-    float jumpHeight = 2.0f;
+    float jumpHeight = 1.5f;
     [SerializeField]
-    float dashDistance = 5.0f;
-
+    private float runSpeedOffset = 1.5f;
     //gravity and drag
     [SerializeField]
     float gravity = -29.81f;
@@ -21,7 +21,16 @@ public class PlayerControl : NetworkBehaviour
 
     //to get CharacterController from the unity
     private CharacterController characterController;
+    [SerializeField]
+    private Vector2 defaultInitialPositionOnPlane = new Vector2(-4, 4);
 
+    [SerializeField]
+    private NetworkVariable<Vector3> networkPositionDirection = new NetworkVariable<Vector3>();
+    [SerializeField]
+    private NetworkVariable<Vector3> networkPositionDirectionY = new NetworkVariable<Vector3>();
+
+    [SerializeField]
+    private NetworkVariable<PlayerState> networkPlayerState = new NetworkVariable<PlayerState>();
     //to calculate
     private Vector3 calcVelocity = Vector3.zero;
 
@@ -29,24 +38,54 @@ public class PlayerControl : NetworkBehaviour
     private Vector3 inputDirection = Vector3.zero;
 
     //prevent double jump
-    private bool isGround = false;
     [SerializeField]
     LayerMask groundLayerMask; // in the ground layer, player can jump only
     [SerializeField]
     float groundCheckDistance = 0.3f;
+    private Animator animator;
     #endregion
 
     // Start is called before the first frame update
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+        characterController = GetComponent<CharacterController>();
+    }
+
     void Start()
     {
-        //to get CharacterController from the unity
-        characterController = GetComponent<CharacterController>();
+        if (IsClient && IsOwner)
+        {
+            transform.position = new Vector3(UnityEngine.Random.Range(defaultInitialPositionOnPlane.x, defaultInitialPositionOnPlane.y), 0,
+                   UnityEngine.Random.Range(defaultInitialPositionOnPlane.x, defaultInitialPositionOnPlane.y));
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Check grounded
+        if(IsClient && IsOwner)
+            ClientMove();
+
+        ClientMoveingtoserver();
+        //Client_visual();
+    }
+
+    private void Client_visual()
+    {
+        
+    }
+
+    private void ClientMoveingtoserver()
+    {
+       // characterController.Move(networkPositionDirectionY.Value * Time.deltaTime);
+        characterController.Move(networkPositionDirection.Value * Time.deltaTime * speed);
+        if(networkPositionDirection.Value != Vector3.zero)
+            transform.forward = networkPositionDirection.Value;
+        characterController.Move(networkPositionDirectionY.Value * Time.deltaTime);
+    }
+
+    private void ClientMove() {
         bool isGrounded = characterController.isGrounded;
 
         //if player is on the ground, gravity = 0
@@ -57,40 +96,41 @@ public class PlayerControl : NetworkBehaviour
 
         //user input - basic movments
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        characterController.Move(move * Time.deltaTime * speed);
 
-        //actual code about user movements
-        if (move != Vector3.zero)
+        if (ActiveRunningActionKey() && move != Vector3.zero)
         {
-            transform.forward = move;
+            move = move * runSpeedOffset;
+            //UpdatePlayerStateServerRpc(PlayerState.Run);
         }
-
-        //user input - jump
+      
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             calcVelocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
-        //user input - dash
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Debug.Log("Dash");
-            calcVelocity += Vector3.Scale(transform.forward, dashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * drags.x + 1)) / -Time.deltaTime),
-                0,
-                (Mathf.Log(1f / (Time.deltaTime * drags.z + 1)) / -Time.deltaTime))
-                );
-        }
-
         //gravity
         calcVelocity.y += gravity * Time.deltaTime;
 
-        //dash ground drags
-        calcVelocity.x /= 1 + drags.x * Time.deltaTime;
-        calcVelocity.y /= 1 + drags.y * Time.deltaTime;
-        calcVelocity.z /= 1 + drags.z * Time.deltaTime;
+        UpdateClientPositionAndRotationServerRpc(move, calcVelocity);
 
-        characterController.Move(calcVelocity * Time.deltaTime);
     }
+    [ServerRpc]
+    public void UpdateClientPositionAndRotationServerRpc(Vector3 newPosition ,Vector3 Y)
+    {
+        networkPositionDirection.Value = newPosition;
+        networkPositionDirectionY.Value = Y;
+    }
+
+    [ServerRpc]
+    public void UpdatePlayerStateServerRpc(PlayerState state)
+    {
+        networkPlayerState.Value = state;
+    }
+    private static bool ActiveRunningActionKey()
+    {
+        return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+    }
+    
 }
 /*using Unity.Netcode;
 using UnityEngine;
