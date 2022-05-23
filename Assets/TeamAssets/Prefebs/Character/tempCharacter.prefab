@@ -990,7 +990,6 @@ GameObject:
   - component: {fileID: 7338105055660752624}
   - component: {fileID: -4964201501985293191}
   - component: {fileID: 7338105055660752627}
-  - component: {fileID: 5760314873270977819}
   - component: {fileID: -7467700400803603699}
   - component: {fileID: 2612112710876770145}
   - component: {fileID: 3002118392218968076}
@@ -1101,19 +1100,12 @@ MonoBehaviour:
   jumpForce: 4
   animator: {fileID: 7338105055660752622}
   rigidBody: {fileID: 7338105055660752624}
---- !u!114 &5760314873270977819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7338105055660752626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74634c982c0d0e14e83b43b2be01f663, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textMeshPro: {fileID: 9049250135736480818}
+  networkPositionDirection:
+    m_InternalValue: {x: 0, y: 0, z: 0}
+  networkRotationDirection:
+    m_InternalValue: {x: 0, y: 0, z: 0, w: 0}
+  networkPlayerState:
+    m_InternalValue: 0
 --- !u!114 &-7467700400803603699
 MonoBehaviour:
   m_ObjectHideFlags: 0
