@@ -4,10 +4,11 @@ using UnityEngine;
 using Unity.Netcode;
 public class CharacterSet : NetworkBehaviour
 {
-    private enum ControlMode
-    {
-        Tank,
-        Direct
+    public enum PlayerStates { 
+        Ground,
+        Land,
+        Move,
+        Jump
     }
     /*[SerializeField]
     private float walkSpeed = 1f;*/
@@ -20,8 +21,8 @@ public class CharacterSet : NetworkBehaviour
 
     [SerializeField] private Animator animator = null;
     [SerializeField] private Rigidbody rigidBody = null;
+    Vector3 direction;
 
-    [SerializeField] private ControlMode controlMode = ControlMode.Direct;
     // Start is called before the first frame update
     private float currentV = 0;
     private float currentH = 0;
@@ -38,10 +39,17 @@ public class CharacterSet : NetworkBehaviour
     private bool jumpInput = false;
 
     private bool isGrounded;
-    private Vector3 ServerVector3 = Vector3.zero;
-    Quaternion Serverquaternion;
+
     //private Vector3 ServerJump = Vector3.zero;
     private List<Collider> collisions = new List<Collider>();
+    [SerializeField]
+    private NetworkVariable<Vector3> networkPositionDirection = new NetworkVariable<Vector3>();
+
+    [SerializeField]
+    private NetworkVariable<Quaternion> networkRotationDirection = new NetworkVariable<Quaternion>();
+
+    [SerializeField]
+    private NetworkVariable<PlayerStates> networkPlayerState = new NetworkVariable<PlayerStates>();
 
     private void Awake()
     {
@@ -51,6 +59,7 @@ public class CharacterSet : NetworkBehaviour
     void Start()
     {
         transform.position = new Vector3(Random.Range(defaultPositionRange.x, defaultPositionRange.y), 0, Random.Range(defaultPositionRange.x, defaultPositionRange.y));
+       
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -63,7 +72,6 @@ public class CharacterSet : NetworkBehaviour
                 {
                     collisions.Add(collision.collider);
                 }
-                isGrounded = true;
             }
         }
     }
@@ -116,37 +124,40 @@ public class CharacterSet : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        animator.SetBool("Grounded", isGrounded);
-        if (IsServer)
-        {
-            UpdateServer();
-        }
+        
         if (IsClient && IsOwner)
         {
+            UpdatePlayerStateServerRpc(PlayerStates.Ground);
             if (!jumpInput && Input.GetKey(KeyCode.Space))
             {
+                Debug.Log("½ÇÇà");
                 jumpInput = true;
             }
-            switch (controlMode)
-            {
-                case ControlMode.Direct:
-                    DirectUpdate();
-                    break;
+            DirectUpdate();
 
-                default:
-                    Debug.LogError("Unsupported state");
-                    break;
-            }
             wasGrounded = isGrounded;
             jumpInput = false;
         }
-
-
+        ClientMovve();
+        ClientVisual();
     }
-    private void UpdateServer()
+
+    private void ClientVisual()
     {
-        transform.rotation = Serverquaternion;
-        transform.position += ServerVector3;
+        if (networkPlayerState.Value == PlayerStates.Ground)
+            animator.SetBool("Grounded", isGrounded);
+        else if (networkPlayerState.Value == PlayerStates.Land)
+            animator.SetTrigger("Land");
+        else if (networkPlayerState.Value == PlayerStates.Jump)
+            animator.SetTrigger("Jump");
+        else if (networkPlayerState.Value == PlayerStates.Move)
+            animator.SetFloat("MoveSpeed", direction.magnitude);
+    }
+
+    private void ClientMovve()
+    {
+        transform.rotation = networkRotationDirection.Value;
+        transform.position += networkPositionDirection.Value;
 
     }
 
@@ -166,7 +177,7 @@ public class CharacterSet : NetworkBehaviour
         currentV = Mathf.Lerp(currentV, v, Time.deltaTime * interpolation);
         currentH = Mathf.Lerp(currentH, h, Time.deltaTime * interpolation);
 
-        Vector3 direction = camera.forward * currentV + camera.right * currentH;
+        direction = camera.forward * currentV + camera.right * currentH;
 
         float directionLength = direction.magnitude;
         direction.y = 0;
@@ -179,7 +190,7 @@ public class CharacterSet : NetworkBehaviour
             // transform.rotation = Quaternion.LookRotation(currentDirection);
             //transform.position += currentDirection * moveSpeed * Time.deltaTime;
             UpdateClientPositionServerRpc(Quaternion.LookRotation(currentDirection), currentDirection * moveSpeed * Time.deltaTime);
-            animator.SetFloat("MoveSpeed", direction.magnitude);
+            UpdatePlayerStateServerRpc(PlayerStates.Move);
         }
 
         JumpingAndLanding();
@@ -189,10 +200,14 @@ public class CharacterSet : NetworkBehaviour
     [ServerRpc]
     private void UpdateClientPositionServerRpc(Quaternion quaternion, Vector3 vector3)
     {
-        Serverquaternion = quaternion;
-        ServerVector3 = vector3;
+        networkRotationDirection.Value = quaternion;
+        networkPositionDirection.Value = vector3;
     }
-
+    [ServerRpc]
+    public void UpdatePlayerStateServerRpc(PlayerStates states)
+    {
+        networkPlayerState.Value = states;
+    }
     private void JumpingAndLanding()
     {
         bool jumpCooldownOver = (Time.time - jumpTimeStamp) >= minJumpInterval;
@@ -210,12 +225,12 @@ public class CharacterSet : NetworkBehaviour
 
         if (!wasGrounded && isGrounded)
         {
-            animator.SetTrigger("Land");
+            UpdatePlayerStateServerRpc(PlayerStates.Land);
         }
 
         if (!isGrounded && wasGrounded)
         {
-            animator.SetTrigger("Jump");
+            UpdatePlayerStateServerRpc(PlayerStates.Jump);
         }
     }
 }

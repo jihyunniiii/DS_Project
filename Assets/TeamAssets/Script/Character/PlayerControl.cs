@@ -5,13 +5,11 @@ using UnityEngine;
 public class PlayerControl : NetworkBehaviour
 {
     [SerializeField]
-    private float walkSpeed = 3.5f;
+    private float walkSpeed = 2.0f;
 
     [SerializeField]
-    private float runSpeedOffset = 2.0f;
+    private float runSpeedOffset = 1.5f;
 
-    [SerializeField]
-    private float rotationSpeed = 3.5f;
 
     [SerializeField]
     private Vector2 defaultInitialPositionOnPlane = new Vector2(-4, 4);
@@ -20,23 +18,26 @@ public class PlayerControl : NetworkBehaviour
     private NetworkVariable<Vector3> networkPositionDirection = new NetworkVariable<Vector3>();
 
     [SerializeField]
-    private NetworkVariable<Vector3> networkRotationDirection = new NetworkVariable<Vector3>();
+    private NetworkVariable<Quaternion> networkRotationDirection = new NetworkVariable<Quaternion>();
 
     [SerializeField]
     private NetworkVariable<PlayerState> networkPlayerState = new NetworkVariable<PlayerState>();
 
-    private CharacterController characterController;
+
 
     // client caches positions
     private Vector3 oldInputPosition = Vector3.zero;
     private Vector3 oldInputRotation = Vector3.zero;
     private PlayerState oldPlayerState = PlayerState.Idle;
 
+    private float currentV = 0;
+    private float currentH = 0;
+    private readonly float interpolation = 10;
+    private Vector3 currentDirection = Vector3.zero;
     private Animator animator;
 
     private void Awake()
     {
-        characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
     }
 
@@ -49,7 +50,7 @@ public class PlayerControl : NetworkBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (IsClient && IsOwner)
         {
@@ -64,12 +65,11 @@ public class PlayerControl : NetworkBehaviour
     {
         if (networkPositionDirection.Value != Vector3.zero)
         {
-            characterController.SimpleMove(networkPositionDirection.Value);
+            transform.position += networkPositionDirection.Value;
         }
-        if (networkRotationDirection.Value != Vector3.zero)
-        {
-            transform.Rotate(networkRotationDirection.Value, Space.World);
-        }
+
+        transform.rotation = networkRotationDirection.Value;
+           
     }
 
     private void ClientVisuals()
@@ -87,29 +87,43 @@ public class PlayerControl : NetworkBehaviour
         Vector3 inputRotation = new Vector3(0, Input.GetAxis("Horizontal"), 0);
 
         // forward & backward direction
-        Vector3 direction = transform.TransformDirection(Vector3.forward);
+        //Vector3 direction = transform.TransformDirection(Vector3.forward);
         float forwardInput = Input.GetAxis("Vertical");
-        Vector3 inputPosition = direction * forwardInput;
-
-        // change animation states
-        if (forwardInput == 0)
-            UpdatePlayerStateServerRpc(PlayerState.Idle);
-        else if (!ActiveRunningActionKey() && forwardInput > 0 && forwardInput <= 1)
-            UpdatePlayerStateServerRpc(PlayerState.Walk);
-        else if (ActiveRunningActionKey() && forwardInput > 0 && forwardInput <= 1)
+        //Vector3 inputPosition = direction * forwardInput;
+        Vector3 inputPosition = Vector3.zero;
+        float v = Input.GetAxis("Vertical");
+        float h = Input.GetAxis("Horizontal");
+        Transform camera = Camera.main.transform;
+        currentV = Mathf.Lerp(currentV, v, Time.deltaTime * interpolation);
+        currentH = Mathf.Lerp(currentH, h, Time.deltaTime * interpolation);
+        Vector3 direction = camera.forward * currentV + camera.right * currentH;
+        float directionLength = direction.magnitude;
+        direction.y = 0;
+        direction = direction.normalized * directionLength;
+        if (direction != Vector3.zero)
         {
-            inputPosition = direction * runSpeedOffset;
+            currentDirection = Vector3.Slerp(currentDirection, direction, Time.deltaTime * interpolation);
+            inputPosition = currentDirection;
+        }
+        // change animation states
+        if (inputPosition == Vector3.zero)
+            UpdatePlayerStateServerRpc(PlayerState.Idle);
+        else if (!ActiveRunningActionKey() && inputPosition != Vector3.zero)
+            UpdatePlayerStateServerRpc(PlayerState.Walk);
+        else if (ActiveRunningActionKey() && inputPosition != Vector3.zero)
+        {
+            inputPosition = currentDirection * runSpeedOffset;
             UpdatePlayerStateServerRpc(PlayerState.Run);
         }
-        else if (forwardInput < 0)
-            UpdatePlayerStateServerRpc(PlayerState.ReverseWalk);
+       /* else if (forwardInput < 0)
+            UpdatePlayerStateServerRpc(PlayerState.ReverseWalk);*/
 
         // let server know about position and rotation client changes
         if (oldInputPosition != inputPosition ||
             oldInputRotation != inputRotation)
         {
             oldInputPosition = inputPosition;
-            UpdateClientPositionAndRotationServerRpc(inputPosition * walkSpeed, inputRotation * rotationSpeed);
+            UpdateClientPositionAndRotationServerRpc(inputPosition * walkSpeed *Time.deltaTime, Quaternion.LookRotation(currentDirection));
         }
     }
 
@@ -119,7 +133,7 @@ public class PlayerControl : NetworkBehaviour
     }
 
     [ServerRpc]
-    public void UpdateClientPositionAndRotationServerRpc(Vector3 newPosition, Vector3 newRotation)
+    public void UpdateClientPositionAndRotationServerRpc(Vector3 newPosition, Quaternion newRotation)
     {
         networkPositionDirection.Value = newPosition;
         networkRotationDirection.Value = newRotation;
