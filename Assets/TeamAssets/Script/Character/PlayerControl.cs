@@ -21,6 +21,7 @@ public class PlayerControl : NetworkBehaviour
     [SerializeField]
     private LayerMask ground;
 
+    public Transform t;
     //to get CharacterController from the unity
     private CharacterController characterController;
     [SerializeField]
@@ -136,12 +137,13 @@ public class PlayerControl : NetworkBehaviour
             calcVelocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
             UpdatePlayerStateServerRpc(PlayerState.Jump);
         }
+        Debug.Log(isGrounded + " а║гн :" + isJumping);
         if (isGrounded && isJumping)
         {
             UpdatePlayerStateServerRpc(PlayerState.Ground);
             isJumping = false;
         }
-
+        
         //gravity
         calcVelocity.y += gravity * Time.deltaTime;
 
