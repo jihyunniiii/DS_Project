@@ -31,13 +31,11 @@ public class lobby : MonoBehaviour
 
     public TMP_InputField wishInput;
     public string Wish = null;
-    public TextMeshProUGUI BoardLanternTxt;
-    public TextMeshProUGUI ScrollViewTxt;
+    public TextMeshProUGUI BoardWishTxt;
     public GameObject LanternBoardBox;
     public GameObject LanternBoardUI;
 
-    public GameObject LanternOriginal;
-    public int LanternNum = 0;
+    public int wishnum = 0;
 
 
     // Start is called before the first frame update
@@ -47,9 +45,10 @@ public class lobby : MonoBehaviour
         UI.gameObject.SetActive(false);
         Coin = 10;
         Lantern = 100;
+        wishnum = 0;
         CoinTxt.text = ": " + Coin.ToString();
         LanternTxt.text = ": " + Lantern.ToString();
-        BoardLanternTxt.text = ": " + Lantern.ToString();
+        BoardWishTxt.text = ": " + wishnum.ToString();
     }
 
     // Update is called once per frame
@@ -75,7 +74,7 @@ public class lobby : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 // string objectName = hit.collider.gameObject.name;
-                
+
                 // Store UI 활성화
                 if (hit.collider.gameObject == StoreBox && SettingSound.activeSelf == false && UI.activeSelf == false && SettingUI.activeSelf == false && LanternBoardUI.activeSelf == false)
                 {
@@ -89,13 +88,6 @@ public class lobby : MonoBehaviour
                 {
                     Debug.Log("게임 매칭 룸으로 이동합니다.");
                     GameObject.FindWithTag("FadeController").GetComponent<FadeInOut>().FadeToNext();
-                }
-
-                if (hit.collider.gameObject == LanternBoardBox && SettingSound.activeSelf == false && UI.activeSelf == false && SettingUI.activeSelf == false && StoreUI.activeSelf == false)
-                {
-                    Debug.Log("연등에 소원을 적고, 연등을 설치합니다.");
-                    LanternBoardUI.gameObject.SetActive(true);
-                    BoardLanternTxt.text = ": " + Lantern.ToString();
                 }
             }
         }
@@ -206,6 +198,10 @@ public class lobby : MonoBehaviour
             Lantern = Lantern + 1;
             CoinTxt.text = ": " + Coin.ToString();
             LanternTxt.text = ": " + Lantern.ToString();
+
+            StoreUI.gameObject.SetActive(false);
+            LanternBoardUI.gameObject.SetActive(true);
+            BoardWishTxt.text = ": " + Lantern.ToString();
         }
         else
         {
@@ -215,33 +211,17 @@ public class lobby : MonoBehaviour
 
     public void WriteWish()
     {
-        if (Lantern > 0)
+        Wish = wishInput.text;
+        if (Wish.Length > 0)
         {
-            Wish = wishInput.text;
-
-            if (Wish.Length > 0)
-            {
-                Debug.Log("연등에 소원을 적고, 연등을 설치하였습니다.");
-                Lantern = Lantern - 1;
-                BoardLanternTxt.text = ": " + Lantern.ToString();
-                ScrollViewTxt.text = ScrollViewTxt.text + "\n" + wishInput.text;
-                wishInput.text = "";
-
-                int x = Random.Range(0, 30);
-                int z = Random.Range(0, 5);
-                GameObject LanternClone = Instantiate(LanternOriginal, new Vector3(x, 25, z), Quaternion.identity);
-                LanternClone.name = "LanternClone" + (LanternNum + 1);
-                LanternNum = LanternNum + 1;
-            }
-
-            else
-            {
-                Debug.Log("소원을 입력하세요.");
-            }
+            Debug.Log("연등에 소원을 적었습니다.");
+            wishInput.text = "";
+            StoreUI.gameObject.SetActive(true);
+            LanternBoardUI.gameObject.SetActive(false);
         }
         else
         {
-            Debug.Log("연등을 가지고 있지 않아 연등에 소원을 적을 수 없습니다. 상점에 가서 연등을 구매하세요.");
+            Debug.Log("소원을 입력하세요.");
         }
     }
 }
