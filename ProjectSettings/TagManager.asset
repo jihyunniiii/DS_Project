@@ -13,6 +13,8 @@ TagManager:
   - Hex
   - lotus
   - UIcamera
+  - lantern
+  - Coupon
   layers:
   - Default
   - TransparentFX
