@@ -18,6 +18,8 @@ public class PlayerControl : NetworkBehaviour
     float gravity = -29.81f;
     [SerializeField]
     private Vector3 drags;
+    [SerializeField]
+    private LayerMask ground;
 
     //to get CharacterController from the unity
     private CharacterController characterController;
@@ -43,6 +45,9 @@ public class PlayerControl : NetworkBehaviour
     [SerializeField]
     float groundCheckDistance = 0.3f;
     private Animator animator;
+    private PlayerState oldPlayerState = PlayerState.Idle;
+    private bool isGrounded;
+    private bool isJumping = false;
     #endregion
 
     // Start is called before the first frame update
@@ -64,16 +69,32 @@ public class PlayerControl : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(IsClient && IsOwner)
-            ClientMove();
-
         ClientMoveingtoserver();
-        //Client_visual();
+        Client_visual();
+        if (IsClient && IsOwner)
+        {
+            ClientMove();
+        }
     }
 
     private void Client_visual()
     {
-        
+        if (oldPlayerState != networkPlayerState.Value && networkPlayerState.Value != PlayerState.Jump && networkPlayerState.Value != PlayerState.Ground)
+        {
+            oldPlayerState = networkPlayerState.Value;
+            animator.SetTrigger($"{networkPlayerState.Value}");
+        }
+        if (oldPlayerState != networkPlayerState.Value && networkPlayerState.Value == PlayerState.Jump && networkPlayerState.Value != PlayerState.Ground)
+        {
+            oldPlayerState = networkPlayerState.Value;
+            animator.SetBool("Jump", true);
+            isJumping = true;
+        }
+        if (oldPlayerState != networkPlayerState.Value && networkPlayerState.Value == PlayerState.Ground && networkPlayerState.Value != PlayerState.Jump)
+        {
+            oldPlayerState = networkPlayerState.Value;
+            animator.SetBool("Jump", false);
+        }
     }
 
     private void ClientMoveingtoserver()
@@ -86,8 +107,9 @@ public class PlayerControl : NetworkBehaviour
     }
 
     private void ClientMove() {
-        bool isGrounded = characterController.isGrounded;
-
+        //bool isGrounded = characterController.isGrounded;
+        isGrounded = IsCheckGrounded();
+        
         //if player is on the ground, gravity = 0
         if (isGrounded && calcVelocity.y < 0)
         {
@@ -96,16 +118,28 @@ public class PlayerControl : NetworkBehaviour
 
         //user input - basic movments
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-
-        if (ActiveRunningActionKey() && move != Vector3.zero)
+        if (move == Vector3.zero)
+        {
+            UpdatePlayerStateServerRpc(PlayerState.Idle);
+        }
+        else if (!ActiveRunningActionKey()&& move != Vector3.zero) {
+            UpdatePlayerStateServerRpc(PlayerState.Walk);
+        }
+        else if (ActiveRunningActionKey() && move != Vector3.zero)
         {
             move = move * runSpeedOffset;
-            //UpdatePlayerStateServerRpc(PlayerState.Run);
+            UpdatePlayerStateServerRpc(PlayerState.Run);
         }
-      
+
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             calcVelocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
+            UpdatePlayerStateServerRpc(PlayerState.Jump);
+        }
+        if (isGrounded && isJumping)
+        {
+            UpdatePlayerStateServerRpc(PlayerState.Ground);
+            isJumping = false;
         }
 
         //gravity
@@ -130,7 +164,21 @@ public class PlayerControl : NetworkBehaviour
     {
         return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
     }
-    
+    private bool IsCheckGrounded()
+    {
+        // CharacterController.IsGrounded가 true라면 Raycast를 사용하지 않고 판정 종료
+        if (characterController.isGrounded) return true;
+        // 발사하는 광선의 초기 위치와 방향
+        // 약간 신체에 박혀 있는 위치로부터 발사하지 않으면 제대로 판정할 수 없을 때가 있다.
+        var ray = new Ray(this.transform.position + Vector3.up * 0.1f, Vector3.down);
+        // 탐색 거리
+        var maxDistance = 0.1f;
+        // 광선 디버그 용도
+        Debug.DrawRay(transform.position + Vector3.up * 0.1f, Vector3.down * maxDistance, Color.red);
+        // Raycast의 hit 여부로 판정
+        // 지상에만 충돌로 레이어를 지정
+        return Physics.Raycast(ray, maxDistance, ground);
+    }
 }
 /*using Unity.Netcode;
 using UnityEngine;
