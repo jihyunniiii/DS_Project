@@ -1107,7 +1107,7 @@ GameObject:
   - component: {fileID: 108255632}
   - component: {fileID: 108255631}
   - component: {fileID: 108255630}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2308,11 +2308,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7338105055660752623, guid: fd2eddd1b722d1743b42ef0b6e2772d5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7338105055660752623, guid: fd2eddd1b722d1743b42ef0b6e2772d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 25
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7338105055660752623, guid: fd2eddd1b722d1743b42ef0b6e2772d5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6731,7 +6731,7 @@ GameObject:
   - component: {fileID: 1396557659}
   - component: {fileID: 1396557658}
   - component: {fileID: 1396557657}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8919,7 +8919,7 @@ GameObject:
   - component: {fileID: 1791137516}
   - component: {fileID: 1791137515}
   - component: {fileID: 1791137514}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: slide
   m_TagString: Untagged
   m_Icon: {fileID: 0}

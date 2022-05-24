@@ -41,22 +41,9 @@ public class RandomLotus : MonoBehaviour
             TimeSpan = 0.0f;
         }
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            Debug.Log("È¹µæ1");
-            Destruction();
-        }
-    }
-
-    private void Destruction()
-    {
-        Debug.Log("È¹µæ2");
-        Destroy(this.gameObject);
-    }
+   
     private void SpawnPosition()
-    {
+    {   
         GameObject selectedPrefab = LotusPrefab;
 
         Vector3 spawnPos = new Vector3(Random.Range(-45, 45), 20, Random.Range(-45, 45));

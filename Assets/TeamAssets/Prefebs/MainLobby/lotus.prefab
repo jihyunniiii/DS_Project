@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 145725530564487641}
   - component: {fileID: 4206580417487641414}
   - component: {fileID: 43258365542940714}
+  - component: {fileID: -5617209345334841672}
   - component: {fileID: 3109735947434103638}
   m_Layer: 0
   m_Name: lotus
@@ -82,6 +83,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-5617209345334841672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3878553245924493528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd90eaa327c0ed34ebac257928c60a6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &3109735947434103638
 SphereCollider:
   m_ObjectHideFlags: 0
