@@ -43,8 +43,6 @@ public class PlayerControl : NetworkBehaviour
     //prevent double jump
     [SerializeField]
     LayerMask groundLayerMask; // in the ground layer, player can jump only
-    [SerializeField]
-    float groundCheckDistance = 0.3f;
     private Animator animator;
     private PlayerState oldPlayerState = PlayerState.Idle;
     private bool isGrounded;
@@ -75,6 +73,16 @@ public class PlayerControl : NetworkBehaviour
         if (IsClient && IsOwner)
         {
             ClientMove();
+            LanternSetting();
+        }
+    }
+
+    public void LanternSetting()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SpawnControl.Instance.SpawnLantern(transform);
+            Debug.Log("실행");
         }
     }
 
@@ -95,6 +103,7 @@ public class PlayerControl : NetworkBehaviour
         {
             oldPlayerState = networkPlayerState.Value;
             animator.SetBool("Jump", false);
+            isJumping = false;
         }
     }
 
@@ -137,11 +146,10 @@ public class PlayerControl : NetworkBehaviour
             calcVelocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
             UpdatePlayerStateServerRpc(PlayerState.Jump);
         }
-        Debug.Log(isGrounded + " 점핑 :" + isJumping);
+       
         if (isGrounded && isJumping)
         {
             UpdatePlayerStateServerRpc(PlayerState.Ground);
-            isJumping = false;
         }
         
         //gravity

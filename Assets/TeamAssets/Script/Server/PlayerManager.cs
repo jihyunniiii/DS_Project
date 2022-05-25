@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DilmerGames.Core.Singletons;
 using Unity.Netcode;
-public class PlayerManager : Singleton<PlayerManager> 
+public class PlayerManager : NetworkSingleton<PlayerManager> 
 {
     
     private NetworkVariable<int> playersInGame = new NetworkVariable<int>();
