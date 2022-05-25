@@ -814,6 +814,7 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 256
+  objectPrefabLantern: {fileID: 1126442856718734, guid: 8561d3e762b505445b3a52ad9300f3b5, type: 3}
   defaultInitialPositionOnPlane: {x: -4, y: 4}
   networkPositionDirection:
     m_InternalValue: {x: 0, y: 0, z: 0}
@@ -824,7 +825,6 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  groundCheckDistance: 0.3
 --- !u!114 &7396360320621765681
 MonoBehaviour:
   m_ObjectHideFlags: 0
