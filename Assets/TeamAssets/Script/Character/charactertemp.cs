@@ -50,7 +50,7 @@ public class charactertemp : MonoBehaviour
     }
     void Start()
     {
-        transform.position = new Vector3(Random.Range(defaultPositionRange.x, defaultPositionRange.y), 0, Random.Range(defaultPositionRange.x, defaultPositionRange.y));
+        //transform.position = new Vector3(Random.Range(defaultPositionRange.x, defaultPositionRange.y), 21, Random.Range(defaultPositionRange.x, defaultPositionRange.y));
     }
     private void OnCollisionEnter(Collision collision)
     {

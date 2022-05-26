@@ -2009,7 +2009,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7320712326219552347, guid: b5f65bf0fd2ad4d4c8bf32493bf878ba, type: 3}
       propertyPath: NextScene
-      value: GameEnterRoom
+      value: GameRoom
       objectReference: {fileID: 0}
     - target: {fileID: 7320712326219552358, guid: b5f65bf0fd2ad4d4c8bf32493bf878ba, type: 3}
       propertyPath: m_Name
@@ -2017,7 +2017,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7320712326219552358, guid: b5f65bf0fd2ad4d4c8bf32493bf878ba, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5f65bf0fd2ad4d4c8bf32493bf878ba, type: 3}
@@ -2444,15 +2444,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7338105055660752623, guid: fd2eddd1b722d1743b42ef0b6e2772d5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7338105055660752623, guid: fd2eddd1b722d1743b42ef0b6e2772d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 7338105055660752623, guid: fd2eddd1b722d1743b42ef0b6e2772d5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.65
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7338105055660752623, guid: fd2eddd1b722d1743b42ef0b6e2772d5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5735,7 +5735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400024, guid: 46ed56d30d8c4114d87ec2e1a50c5504, type: 3}
       propertyPath: m_RootOrder
-      value: 27
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 400024, guid: 46ed56d30d8c4114d87ec2e1a50c5504, type: 3}
       propertyPath: m_LocalScale.x
@@ -5811,6 +5811,7 @@ MonoBehaviour:
   getCamera: {fileID: 348147259}
   CouponUI: {fileID: 968195014}
   lobbyscript: {fileID: 994081705}
+  couponcheck: 0
 --- !u!65 &1136302802
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5918,7 +5919,7 @@ Transform:
   m_LocalScale: {x: 20, y: 1, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1176074359
 GameObject:
