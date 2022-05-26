@@ -29,7 +29,7 @@ public class RandomLotus : MonoBehaviour
     public int letter;//랜덤으로 선택될 배열 index
     public bool A ;//button 활성화,비활성화 위함
 
-
+    public int i = 1;
 
     void Start()
     {   
@@ -40,19 +40,14 @@ public class RandomLotus : MonoBehaviour
 
         Invoke("Spawn", CheckTime);
 
-        InvokeRepeating("phrase", 10, 60);
+        InvokeRepeating("phrase", 10, 200);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (wordUI.activeSelf == false)
-        {
-            A = false;
-        }
-        else if(wordUI.activeSelf ==true)
-            A = true;
+        
 
         TimeSpan += Time.deltaTime;
         DestroyLotus();
@@ -61,7 +56,7 @@ public class RandomLotus : MonoBehaviour
 
     public void Spawn()
     {
-        count = Random.Range(5, 8);
+        count = Random.Range(6, 8);
 
 
         if (TimeSpan > CheckTime)
@@ -81,7 +76,7 @@ public class RandomLotus : MonoBehaviour
     {
         GameObject selectedPrefab = LotusPrefab;
 
-        Vector3 spawnPos = new Vector3(Random.Range(-300, -170), 20, Random.Range(-60, 60));
+        Vector3 spawnPos = new Vector3(Random.Range(-300, -170), 85, Random.Range(-60, 60));
 
         GameObject instance = Instantiate(selectedPrefab, spawnPos, Quaternion.identity);
 
@@ -94,7 +89,7 @@ public class RandomLotus : MonoBehaviour
         len = L_count.Length;//남아있는 연꽃의 개수 
 
 
-        for (int i = 1; i < count + 1; i++)
+        for (i = 1; i < count + 1; i++)
         {
             if (len == count - i)
             {
@@ -103,14 +98,11 @@ public class RandomLotus : MonoBehaviour
                 
                 if (i != 0 && i % 5 == 0 && A==false )
                 {
-                    
                     wordTxt.text = TodayWord[letter].ToString();
-
                     wordUI.SetActive(true);
 
                     A = true;
                 }
-
             }
         }
     }
@@ -123,12 +115,12 @@ public class RandomLotus : MonoBehaviour
 
     public void button()
     {
-        if(A==true)
+        if (wordUI.activeSelf == true)
         {
             wordUI.SetActive(false);
             A = false;
+
         }
-        
     }
    
 }
