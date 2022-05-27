@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape))   // Esc키를 누르면
         {
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
             ExitPannel.SetActive(true);
         }
     }
