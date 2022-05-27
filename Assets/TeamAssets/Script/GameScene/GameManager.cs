@@ -7,10 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public GameObject ExitPannel;
     public string thisScene;
-    public int floorindex;
-    public GameObject[] stages;
-    //public Text UIStage;
-    public GameObject tile;
 
     // Use this for initialization
     void Start()
@@ -22,10 +18,9 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape))   // Esc키를 누르면
         {
-            //Time.timeScale = 0f;
+            Time.timeScale = 0f;
             ExitPannel.SetActive(true);
         }
-
     }
 
     public void 계속하기()
@@ -48,8 +43,5 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("MainLobby");
     }
-    public void Floor()
-    {
 
-    }
 }
