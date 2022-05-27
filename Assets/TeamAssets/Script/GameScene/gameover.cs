@@ -5,6 +5,7 @@ using UnityEngine;
 public class gameover : MonoBehaviour
 {
     public GameObject GameOver;
+    public GameObject tile;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class gameover : MonoBehaviour
         if(col.gameObject.tag == "Player")
         {
             GameOver.SetActive(true);
+            Destroy(tile);
         }
     }
 }
