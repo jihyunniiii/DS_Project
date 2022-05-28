@@ -17,7 +17,8 @@ public class lobby : MonoBehaviour
     public Slider audioSlider;
     public AudioSource audioSource;
 
-    public GameObject StoreBox;
+    public GameObject StoreBack;
+    public GameObject StoreFront;
     public GameObject StoreUI;
     public Camera getCamera;
     private RaycastHit hit;
@@ -27,7 +28,8 @@ public class lobby : MonoBehaviour
     public int Coin;
     public int Lantern;
 
-    public GameObject GameRoomBox;
+    public GameObject GameRoomBack;
+    public GameObject GameRoomFront;
 
     public TMP_InputField wishInput;
     public string Wish = null;
@@ -73,10 +75,10 @@ public class lobby : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                // string objectName = hit.collider.gameObject.name;
+                string objectName = hit.collider.gameObject.name;
 
                 // Store UI 활성화
-                if (hit.collider.gameObject == StoreBox && SettingSound.activeSelf == false && UI.activeSelf == false && SettingUI.activeSelf == false && LanternBoardUI.activeSelf == false)
+                if (hit.collider.gameObject == StoreBack || hit.collider.gameObject == StoreFront && SettingSound.activeSelf == false && UI.activeSelf == false && SettingUI.activeSelf == false && LanternBoardUI.activeSelf == false)
                 {
                     Debug.Log("상점에 들어와 물품을 구매합니다.");
                     StoreUI.gameObject.SetActive(true);
@@ -84,7 +86,7 @@ public class lobby : MonoBehaviour
                     LanternTxt.text = ": " + Lantern.ToString();
                 }
 
-                if (hit.collider.gameObject == GameRoomBox && SettingSound.activeSelf == false && UI.activeSelf == false && SettingUI.activeSelf == false && StoreUI.activeSelf == false && LanternBoardUI.activeSelf == false)
+                if (hit.collider.gameObject == GameRoomBack || hit.collider.gameObject == GameRoomFront && SettingSound.activeSelf == false && UI.activeSelf == false && SettingUI.activeSelf == false && StoreUI.activeSelf == false && LanternBoardUI.activeSelf == false)
                 {
                     Debug.Log("게임 매칭 룸으로 이동합니다.");
                     GameObject.FindWithTag("FadeController").GetComponent<FadeInOut>().FadeToNext();
