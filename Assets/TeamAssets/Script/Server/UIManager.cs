@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
     public GameObject Camera;
     public GameObject Camera2;
     public GameObject ServerUI;
+    public GameObject ClientServerJoincode;
+    public InputField joinCodeInput;
     string Hostname;
     private bool isHost = false;
     // Start is called before the first frame update
@@ -37,20 +39,24 @@ public class UIManager : MonoBehaviour
         }
         else { 
             ClientButton.SetActive(true);
+            ClientServerJoincode.SetActive(true);
         }
 
-        startHostButton.onClick.AddListener(() => {
+        startHostButton.onClick.AddListener(async () => {
+            if (RelayManager.Instance.IsRelayEnabled)
+                await RelayManager.Instance.SetupRelay();
+
             if (NetworkManager.Singleton.StartHost())
             {
                 JoingCanvas.SetActive(false);
                 Camera.SetActive(false);
                 ServerUI.SetActive(true);
                 Camera2.SetActive(true);
-                Logger.Instance.LogInfo("Host started....");
+               // Logger.Instance.LogInfo("Host started....");
                 
             }
             else {
-                Logger.Instance.LogInfo("Host could not be started....");
+                //Logger.Instance.LogInfo("Host could not be started....");
             }
         });
         /*startServerButton.onClick.AddListener(() => {
@@ -67,18 +73,22 @@ public class UIManager : MonoBehaviour
                 Logger.Instance.LogInfo("Server could not be started....");
             }
         });*/
-        startClientButton.onClick.AddListener(() => {
+        startClientButton.onClick.AddListener(async () => {
+            if (RelayManager.Instance.IsRelayEnabled && !string.IsNullOrEmpty(joinCodeInput.text))
+                await RelayManager.Instance.JoinRelay(joinCodeInput.text);
+
             if (NetworkManager.Singleton.StartClient())
             {
                 JoingCanvas.SetActive(false);
                 Camera.SetActive(false);
                 ServerUI.SetActive(true);
                 Camera2.SetActive(true);
-                Logger.Instance.LogInfo("Client started....");
+                ClientServerJoincode.SetActive(false);
+               // Logger.Instance.LogInfo("Client started....");
             }
             else
             {
-                Logger.Instance.LogInfo("Client could not be started....");
+               // Logger.Instance.LogInfo("Client could not be started....");
             }
         });
     }
