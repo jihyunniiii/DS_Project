@@ -1,7 +1,10 @@
 using Unity.Netcode;
 using UnityEngine;
 using DilmerGames.Core.Singletons;
+using Unity.Netcode.Samples;
+
 [RequireComponent(typeof(NetworkObject))]
+[RequireComponent(typeof(ClientNetworkTransform))]
 public class PlayerControl : NetworkSingleton<PlayerControl>
 {
     #region Variables
@@ -21,21 +24,10 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
     private LayerMask ground;
     [SerializeField]
     private GameObject objectPrefabLantern;
-
-    private NetworkVariable<NetworkString> playersName = new NetworkVariable<NetworkString>();
-
-    private bool overlaySet = false;
-    private bool isonetimeset = false;
-
     //to get CharacterController from the unity
     private CharacterController characterController;
     [SerializeField]
     private Vector2 defaultInitialPositionOnPlane = new Vector2(-4, 4);
-
-    [SerializeField]
-    private NetworkVariable<Vector3> networkPositionDirection = new NetworkVariable<Vector3>();
-    [SerializeField]
-    private NetworkVariable<Vector3> networkPositionDirectionY = new NetworkVariable<Vector3>();
 
     [SerializeField]
     private NetworkVariable<PlayerState> networkPlayerState = new NetworkVariable<PlayerState>();
@@ -67,24 +59,24 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
             transform.position = new Vector3(UnityEngine.Random.Range(defaultInitialPositionOnPlane.x, defaultInitialPositionOnPlane.y), 0,
                    UnityEngine.Random.Range(defaultInitialPositionOnPlane.x, defaultInitialPositionOnPlane.y));
         }
+        CameraMove.Instance.FollowPlayer(transform);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
         if (IsClient && IsOwner)
         {
             ClientMove();
             LanternSetting();
         }
-        ClientMoveingtoserver();
         Client_visual();
     }
-
+   
     public void LanternSetting()
     {
-        
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             if (IsServer)
@@ -132,32 +124,24 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
         }
     }
 
-    private void ClientMoveingtoserver()
+    private void ClientMove()
     {
-       // characterController.Move(networkPositionDirectionY.Value * Time.deltaTime);
-        characterController.Move(networkPositionDirection.Value * Time.deltaTime * speed);
-        if(networkPositionDirection.Value != Vector3.zero)
-            transform.forward = networkPositionDirection.Value;
-        characterController.Move(networkPositionDirectionY.Value * Time.deltaTime);
-    }
-
-    private void ClientMove() {
         //bool isGrounded = characterController.isGrounded;
         isGrounded = IsCheckGrounded();
-        
-        //if player is on the ground, gravity = 0
+       
         if (isGrounded && calcVelocity.y < 0)
         {
             calcVelocity.y = 0f;
         }
-
+        
         //user input - basic movments
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         if (move == Vector3.zero)
         {
             UpdatePlayerStateServerRpc(PlayerState.Idle);
         }
-        else if (!ActiveRunningActionKey()&& move != Vector3.zero) {
+        else if (!ActiveRunningActionKey() && move != Vector3.zero)
+        {
             UpdatePlayerStateServerRpc(PlayerState.Walk);
         }
         else if (ActiveRunningActionKey() && move != Vector3.zero)
@@ -165,31 +149,25 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
             move = move * runSpeedOffset;
             UpdatePlayerStateServerRpc(PlayerState.Run);
         }
-        
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded )
+        characterController.Move(transform.TransformDirection(move) * Time.deltaTime * speed);
+        /*if (move != Vector3.zero)
+            transform.forward = move;*/
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             calcVelocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
             UpdatePlayerStateServerRpc(PlayerState.Jump);
         }
-       
+
         if (isGrounded && isJumping)
         {
             UpdatePlayerStateServerRpc(PlayerState.Ground);
         }
-        
+
         //gravity
         calcVelocity.y += gravity * Time.deltaTime;
-
-        UpdateClientPositionAndRotationServerRpc(move, calcVelocity);
-
+        characterController.Move(calcVelocity * Time.deltaTime);   
     }
-    [ServerRpc]
-    public void UpdateClientPositionAndRotationServerRpc(Vector3 newPosition ,Vector3 Y)
-    {
-        networkPositionDirection.Value = newPosition;
-        networkPositionDirectionY.Value = Y;
-    }
-
+    
     [ServerRpc]
     public void UpdatePlayerStateServerRpc(PlayerState state)
     {
@@ -214,5 +192,5 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
         // 지상에만 충돌로 레이어를 지정
         return Physics.Raycast(ray, maxDistance, ground);
     }
-    
+
 }

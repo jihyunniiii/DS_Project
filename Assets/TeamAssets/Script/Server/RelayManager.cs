@@ -8,6 +8,7 @@ using Unity.Services.Authentication;
 using Unity.Services.Relay.Models;
 using Unity.Services.Relay;
 using UnityEngine.UI;
+using BackEnd;
 
 public class RelayManager : Singleton<RelayManager>
 {
@@ -50,6 +51,11 @@ public class RelayManager : Singleton<RelayManager>
         Transport.SetRelayServerData(relayHostData.IPv4Address, relayHostData.Port, relayHostData.AllocationIDBytes, relayHostData.Key, relayHostData.ConnectionData);
 
         ServerjoinCode.text = relayHostData.JoinCode;
+
+        Param param = new Param();
+        param.Add("ServerPort", relayHostData.JoinCode);
+        Backend.GameData.Update("UserInfo", "2022-05-21T11:20:34.325Z", param);
+
         return relayHostData;
     }
 

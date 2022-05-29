@@ -671,10 +671,10 @@ GameObject:
   - component: {fileID: 4820286304567637248}
   - component: {fileID: 5916222009275485192}
   - component: {fileID: -6313263522537366077}
-  - component: {fileID: -8353310490286126996}
   - component: {fileID: 8387545591123114281}
   - component: {fileID: 4620051106230683377}
   - component: {fileID: 7396360320621765681}
+  - component: {fileID: 4648444932332154250}
   m_Layer: 8
   m_Name: PlayerArmatureNetworkAuthorative
   m_TagString: Player
@@ -754,33 +754,6 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &-8353310490286126996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2255991852033553856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 1
-  SyncRotAngleX: 1
-  SyncRotAngleY: 1
-  SyncRotAngleZ: 1
-  SyncScaleX: 0
-  SyncScaleY: 0
-  SyncScaleZ: 0
-  PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
-  InLocalSpace: 0
-  Interpolate: 1
-  CanCommitToTransform: 0
 --- !u!114 &8387545591123114281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -815,11 +788,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   objectPrefabLantern: {fileID: 1126442856718734, guid: 8561d3e762b505445b3a52ad9300f3b5, type: 3}
+  moveSpeed: 10
   defaultInitialPositionOnPlane: {x: -4, y: 4}
   networkPositionDirection:
     m_InternalValue: {x: 0, y: 0, z: 0}
-  networkPositionDirectionY:
+  networkJumpDirection:
     m_InternalValue: {x: 0, y: 0, z: 0}
+  networkRotationDirection:
+    m_InternalValue: {x: 0, y: 0, z: 0, w: 0}
   networkPlayerState:
     m_InternalValue: 0
   groundLayerMask:
@@ -837,6 +813,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74634c982c0d0e14e83b43b2be01f663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4648444932332154250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2255991852033553856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c9647dc784a46bca664910f182491e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  InLocalSpace: 0
+  Interpolate: 1
+  CanCommitToTransform: 0
 --- !u!1 &2411949286777859802
 GameObject:
   m_ObjectHideFlags: 0

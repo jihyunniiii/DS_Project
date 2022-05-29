@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class CameraMove : MonoBehaviour
+using DilmerGames.Core.Singletons;
+public class CameraMove : Singleton<CameraMove>
 {
     public Transform objectTofollow;
     public float followSpeed = 10f;
@@ -30,6 +30,9 @@ public class CameraMove : MonoBehaviour
         
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
+    }
+    public void FollowPlayer(Transform transform) {
+        objectTofollow = transform;
     }
     private void Update()
     {

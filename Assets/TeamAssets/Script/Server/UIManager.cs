@@ -74,6 +74,11 @@ public class UIManager : MonoBehaviour
             }
         });*/
         startClientButton.onClick.AddListener(async () => {
+
+            string[] select = { "ServerPort" };
+            var bros = Backend.GameData.Get("UserInfo", "2022-05-21T11:20:34.325Z", select);
+            joinCodeInput.text = bros.GetReturnValuetoJSON()["row"][0]["S"].ToString();
+            
             if (RelayManager.Instance.IsRelayEnabled && !string.IsNullOrEmpty(joinCodeInput.text))
                 await RelayManager.Instance.JoinRelay(joinCodeInput.text);
 
@@ -97,5 +102,15 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         playersInGameText.text = $"Players in game : {PlayerManager.Instance.PlayersInGame}";
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (Hostname.Equals("Bedford")) {
+            Param param = new Param();
+            string temp = "";
+            param.Add("ServerPort", temp);
+            Backend.GameData.Update("UserInfo", "2022-05-21T11:20:34.325Z", param);
+        }
     }
 }

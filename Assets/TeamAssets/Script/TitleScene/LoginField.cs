@@ -66,6 +66,11 @@ public class LoginField : MonoBehaviour
             if (bro.IsSuccess())
             {
                 Debug.Log("로그인에 성공했습니다");
+                /*string[] select = { "ServerPort" };
+                var bros = Backend.GameData.Get("UserInfo", "2022-05-21T11:20:34.325Z", select);
+                var s = bros.GetReturnValuetoJSON();
+                var ss = s["row"][0]["S"].ToString();
+                Debug.Log(ss);*/
                 GameObject.FindWithTag("FadeController").GetComponent<FadeInOut>().FadeToNext();
             }
         }
@@ -128,7 +133,7 @@ public class LoginField : MonoBehaviour
                     Debug.Log("회원가입에 성공했습니다");
                     Backend.BMember.CustomLogin(idInput.text, pwInput.text);
                     Param param = new Param();
-                    param.Add("재화", 0);
+                    param.Add("재화", 10);
                     param.Add("연등", 0);
                     param.Add("전공", Major.text);
                     Backend.GameData.Insert("UserInfo", param);
