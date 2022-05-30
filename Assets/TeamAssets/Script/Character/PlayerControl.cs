@@ -60,8 +60,11 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
     {
         if (IsClient && IsOwner)
         {
-            transform.position = new Vector3(UnityEngine.Random.Range(defaultInitialPositionOnPlane.x, defaultInitialPositionOnPlane.y), 0,
+            transform.position = new Vector3(UnityEngine.Random.Range(defaultInitialPositionOnPlane.x, defaultInitialPositionOnPlane.y), 45,
                    UnityEngine.Random.Range(defaultInitialPositionOnPlane.x, defaultInitialPositionOnPlane.y));
+            if (transform.position.y != 45) {
+                transform.position = new Vector3(transform.position.x,45,transform.position.z);
+            }
             CameraMove.Instance.FollowPlayer(transform);
             _camera = Camera.main;
         }
@@ -113,7 +116,7 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
     public void Spawn()
     {
         Vector3 temp;
-        Vector3 t = new Vector3(0, 2f, 0);
+        Vector3 t = new Vector3(0, 8f, 0);
         temp = transform.position - t;
         GameObject go = Instantiate(objectPrefabLantern, temp, Quaternion.identity);
         go.GetComponent<NetworkObject>().Spawn();
@@ -173,8 +176,8 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
             UpdatePlayerStateServerRpc(PlayerState.Run);
         }
         characterController.Move(moveDriection * Time.deltaTime * speed);
-        /*if (move != Vector3.zero)
-            transform.forward = move;*/
+        /*if (moveDriection != Vector3.zero)
+            transform.forward = moveDriection;*/
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             calcVelocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
@@ -227,5 +230,14 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
         // 지상에만 충돌로 레이어를 지정
         return Physics.Raycast(ray, maxDistance, ground);
     }
-
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (IsClient && IsOwner) {
+            if (hit.collider == null) return;
+            else if(hit.gameObject.tag == "lotus"){
+                Destroy(hit.gameObject);
+            }
+        }
+        
+    }
 }

@@ -284,6 +284,8 @@ MonoBehaviour:
   ServerUI: {fileID: 1607507991}
   ClientServerJoincode: {fileID: 1502776115}
   joinCodeInput: {fileID: 1502776117}
+  loUI: {fileID: 0}
+  LoadingUI: {fileID: 0}
 --- !u!4 &78326777
 Transform:
   m_ObjectHideFlags: 0
@@ -1299,7 +1301,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3523154835854766661, guid: f94e81242989e224fa12a11fe3002867, type: 3}
       propertyPath: followSpeed
-      value: 10
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523154835854766661, guid: f94e81242989e224fa12a11fe3002867, type: 3}
+      propertyPath: maxDistance
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f94e81242989e224fa12a11fe3002867, type: 3}

@@ -8,7 +8,7 @@ public class CameraMove : Singleton<CameraMove>
     public float followSpeed = 10f;
     public float sensitivity = 100f;
     public float clampAngle = 70f;
-
+    public Vector3 temp = new Vector3(0, 1, 0);
     private float rotX;
     private float rotY;
 
@@ -45,7 +45,8 @@ public class CameraMove : Singleton<CameraMove>
     }
     private void LateUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, objectTofollow.position, followSpeed * Time.deltaTime);
+
+        transform.position = Vector3.MoveTowards(transform.position, objectTofollow.position + temp, followSpeed * Time.deltaTime);
 
         finalDir = transform.TransformPoint(dirNorMalized * maxDistance);
 

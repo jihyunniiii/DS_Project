@@ -24,6 +24,8 @@ public class UIManager : MonoBehaviour
     public GameObject ServerUI;
     public GameObject ClientServerJoincode;
     public InputField joinCodeInput;
+    public GameObject loUI;
+    public GameObject LoadingUI; 
     string Hostname;
     private bool isHost = false;
     // Start is called before the first frame update
@@ -43,19 +45,22 @@ public class UIManager : MonoBehaviour
         }
 
         startHostButton.onClick.AddListener(async () => {
+            LoadingUI.SetActive(true);
             if (RelayManager.Instance.IsRelayEnabled)
                 await RelayManager.Instance.SetupRelay();
 
             if (NetworkManager.Singleton.StartHost())
-            {
+            {      
+                loUI.SetActive(true);
                 JoingCanvas.SetActive(false);
                 Camera.SetActive(false);
                 ServerUI.SetActive(true);
                 Camera2.SetActive(true);
                // Logger.Instance.LogInfo("Host started....");
-                
+                LoadingUI.SetActive(false);
             }
             else {
+                LoadingUI.SetActive(false);
                 //Logger.Instance.LogInfo("Host could not be started....");
             }
         });
@@ -74,7 +79,7 @@ public class UIManager : MonoBehaviour
             }
         });*/
         startClientButton.onClick.AddListener(async () => {
-
+            LoadingUI.SetActive(true);
             string[] select = { "ServerPort" };
             var bros = Backend.GameData.Get("UserInfo", "2022-05-21T11:20:34.325Z", select);
             joinCodeInput.text = bros.GetReturnValuetoJSON()["row"][0]["S"].ToString();
@@ -84,6 +89,8 @@ public class UIManager : MonoBehaviour
 
             if (NetworkManager.Singleton.StartClient())
             {
+                LoadingUI.SetActive(false);
+                loUI.SetActive(true);
                 JoingCanvas.SetActive(false);
                 Camera.SetActive(false);
                 ServerUI.SetActive(true);
@@ -93,7 +100,8 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-               // Logger.Instance.LogInfo("Client could not be started....");
+                LoadingUI.SetActive(false);
+                // Logger.Instance.LogInfo("Client could not be started....");
             }
         });
     }

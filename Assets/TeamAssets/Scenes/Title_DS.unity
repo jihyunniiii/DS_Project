@@ -255,7 +255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7320712326219552347, guid: b5f65bf0fd2ad4d4c8bf32493bf878ba, type: 3}
       propertyPath: NextScene
-      value: GameEnterRoom
+      value: MainLobby
       objectReference: {fileID: 0}
     - target: {fileID: 7320712326219552358, guid: b5f65bf0fd2ad4d4c8bf32493bf878ba, type: 3}
       propertyPath: m_Name

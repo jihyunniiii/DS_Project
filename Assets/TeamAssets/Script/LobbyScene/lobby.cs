@@ -13,6 +13,7 @@ public class lobby : MonoBehaviour
     public GameObject SettingUI;
     public GameObject SettingSound;
     public GameObject RankUI;
+    public GameObject loUI;
 
     public Slider audioSlider;
     public AudioSource audioSource;
@@ -51,6 +52,7 @@ public class lobby : MonoBehaviour
         CoinTxt.text = ": " + Coin.ToString();
         LanternTxt.text = ": " + Lantern.ToString();
         BoardWishTxt.text = ": " + wishnum.ToString();
+        
     }
 
     // Update is called once per frame
@@ -61,11 +63,13 @@ public class lobby : MonoBehaviour
             if (UI.activeSelf == true)
             {
                 UI.gameObject.SetActive(false);
+                loUI.SetActive(true);
             }
 
             else if (UI.activeSelf == false && SettingUI.activeSelf == false)
             {
                 UI.gameObject.SetActive(true);
+                loUI.SetActive(false);
             }
         }
 
