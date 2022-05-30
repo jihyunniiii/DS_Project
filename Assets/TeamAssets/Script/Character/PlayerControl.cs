@@ -45,11 +45,15 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
     private bool isJumping = false;
     #endregion
 
+    Camera _camera;
+    bool toggleCameraRotation = false;
+    float smoothness = 10.0f;
     // Start is called before the first frame update
     private void Awake()
     {
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
+        
     }
 
     void Start()
@@ -58,8 +62,10 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
         {
             transform.position = new Vector3(UnityEngine.Random.Range(defaultInitialPositionOnPlane.x, defaultInitialPositionOnPlane.y), 0,
                    UnityEngine.Random.Range(defaultInitialPositionOnPlane.x, defaultInitialPositionOnPlane.y));
+            CameraMove.Instance.FollowPlayer(transform);
+            _camera = Camera.main;
         }
-        CameraMove.Instance.FollowPlayer(transform);
+        
     }
 
     // Update is called once per frame
@@ -68,12 +74,26 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
 
         if (IsClient && IsOwner)
         {
+            if (Input.GetKey(KeyCode.LeftControl))
+            {
+                toggleCameraRotation = true;
+            }
+            else {
+                toggleCameraRotation = false;
+            }
+            //LanternSetting();
             ClientMove();
-            LanternSetting();
+            
         }
         Client_visual();
     }
-   
+    private void LateUpdate()
+    {
+        if (toggleCameraRotation != true) {
+            Vector3 playerRotate = Vector3.Scale(_camera.transform.forward, new Vector3(1, 0, 1));
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotate), Time.deltaTime * smoothness);
+        }
+    }
     public void LanternSetting()
     {
 
@@ -93,7 +113,7 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
     public void Spawn()
     {
         Vector3 temp;
-        Vector3 t = new Vector3(0, 1.5f, 0);
+        Vector3 t = new Vector3(0, 2f, 0);
         temp = transform.position - t;
         GameObject go = Instantiate(objectPrefabLantern, temp, Quaternion.identity);
         go.GetComponent<NetworkObject>().Spawn();
@@ -133,23 +153,26 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
         {
             calcVelocity.y = 0f;
         }
-        
+        Vector3 forward = transform.TransformDirection(Vector3.forward);
+        Vector3 right = transform.TransformDirection(Vector3.right);
+
+        Vector3 moveDriection = forward * Input.GetAxisRaw("Vertical") + right * Input.GetAxisRaw("Horizontal");
         //user input - basic movments
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        if (move == Vector3.zero)
+        //Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        if (moveDriection == Vector3.zero)
         {
             UpdatePlayerStateServerRpc(PlayerState.Idle);
         }
-        else if (!ActiveRunningActionKey() && move != Vector3.zero)
+        else if (!ActiveRunningActionKey() && moveDriection != Vector3.zero)
         {
             UpdatePlayerStateServerRpc(PlayerState.Walk);
         }
-        else if (ActiveRunningActionKey() && move != Vector3.zero)
+        else if (ActiveRunningActionKey() && moveDriection != Vector3.zero)
         {
-            move = move * runSpeedOffset;
+            moveDriection = moveDriection * runSpeedOffset;
             UpdatePlayerStateServerRpc(PlayerState.Run);
         }
-        characterController.Move(transform.TransformDirection(move) * Time.deltaTime * speed);
+        characterController.Move(moveDriection * Time.deltaTime * speed);
         /*if (move != Vector3.zero)
             transform.forward = move;*/
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
@@ -165,7 +188,19 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
 
         //gravity
         calcVelocity.y += gravity * Time.deltaTime;
-        characterController.Move(calcVelocity * Time.deltaTime);   
+        characterController.Move(calcVelocity * Time.deltaTime);
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (IsServer)
+            {
+                Spawn();
+            }
+            else if (IsClient && IsOwner)
+            {
+                SpawnServerRpc();
+            }
+
+        }
     }
     
     [ServerRpc]
