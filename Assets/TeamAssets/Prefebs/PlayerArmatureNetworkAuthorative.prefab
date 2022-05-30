@@ -780,7 +780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  jumpHeight: 7
+  jumpHeight: 5
   runSpeedOffset: 2
   gravity: -29.81
   drags: {x: 0, y: 0, z: 0}

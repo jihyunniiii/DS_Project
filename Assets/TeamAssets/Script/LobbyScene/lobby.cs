@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-
+using BackEnd;
 public class lobby : MonoBehaviour
 {
     public GameObject UI;
@@ -14,7 +14,7 @@ public class lobby : MonoBehaviour
     public GameObject SettingSound;
     public GameObject RankUI;
     public GameObject loUI;
-
+    public GameObject CurUI;
     public Slider audioSlider;
     public AudioSource audioSource;
 
@@ -26,6 +26,8 @@ public class lobby : MonoBehaviour
 
     public TextMeshProUGUI CoinTxt;
     public TextMeshProUGUI LanternTxt;
+    public TextMeshProUGUI CoinTxtCur;
+    public TextMeshProUGUI LanternTxtCur;
     public int Coin;
     public int Lantern;
 
@@ -37,20 +39,39 @@ public class lobby : MonoBehaviour
     public TextMeshProUGUI BoardWishTxt;
     public GameObject LanternBoardBox;
     public GameObject LanternBoardUI;
-
+    string inDate = "";
     public int wishnum = 0;
 
-
+    private static lobby instance = null;
+    private void Awake()
+    {
+        if (instance != null) {
+            Destroy(instance);
+        }
+        instance = this;
+        //돈, 랜턴 갯수 초기화(데비터베이스 접근)
+        Where where = new Where();
+        var bro = Backend.GameData.GetMyData("user", where);
+        
+        if (bro.Rows().Count > 0)
+        {
+            inDate = bro.Rows()[0]["inDate"]["S"].ToString();
+        }
+        Coin = int.Parse(bro.Rows()[0]["Money"]["S"].ToString());
+        Lantern = int.Parse(bro.Rows()[0]["Lantern"]["S"].ToString());
+    }
     // Start is called before the first frame update
     void Start()
     {
+        
         audioSource = GetComponent<AudioSource>();
         UI.gameObject.SetActive(false);
-        Coin = 10;
-        Lantern = 100;
+
         wishnum = 0;
         CoinTxt.text = ": " + Coin.ToString();
         LanternTxt.text = ": " + Lantern.ToString();
+        CoinTxtCur.text = ": " + Coin.ToString();
+        LanternTxtCur.text = ": " + Lantern.ToString();
         BoardWishTxt.text = ": " + wishnum.ToString();
         
     }
@@ -64,12 +85,14 @@ public class lobby : MonoBehaviour
             {
                 UI.gameObject.SetActive(false);
                 loUI.SetActive(true);
+                CurUI.SetActive(true);
             }
 
             else if (UI.activeSelf == false && SettingUI.activeSelf == false)
-            {
+            { 
                 UI.gameObject.SetActive(true);
                 loUI.SetActive(false);
+                CurUI.SetActive(false);
             }
         }
 
@@ -86,8 +109,11 @@ public class lobby : MonoBehaviour
                 {
                     Debug.Log("상점에 들어와 물품을 구매합니다.");
                     StoreUI.gameObject.SetActive(true);
+                    CurUI.gameObject.SetActive(false);
                     CoinTxt.text = ": " + Coin.ToString();
                     LanternTxt.text = ": " + Lantern.ToString();
+                    CoinTxtCur.text = ": " + Coin.ToString();
+                    LanternTxtCur.text = ": " + Lantern.ToString();
                 }
 
                 if (hit.collider.gameObject == GameRoomBack || hit.collider.gameObject == GameRoomFront && SettingSound.activeSelf == false && UI.activeSelf == false && SettingUI.activeSelf == false && StoreUI.activeSelf == false && LanternBoardUI.activeSelf == false)
@@ -98,7 +124,13 @@ public class lobby : MonoBehaviour
             }
         }
     }
-
+    public static lobby GetInstance() {
+        if(!instance)
+        {
+            return null;
+        }
+        return instance;
+    }
     public void SettingUIOn()
     {
         if (SettingSound.activeSelf == true && UI.activeSelf == false)
@@ -158,11 +190,13 @@ public class lobby : MonoBehaviour
         else if (StoreUI.activeSelf == true)
         {
             StoreUI.gameObject.SetActive(false);
+            CurUI.gameObject.SetActive(true);
         }
 
         else if (LanternBoardUI.activeSelf == true)
         {
             LanternBoardUI.gameObject.SetActive(false);
+            CurUI.gameObject.SetActive(true);
         }
     }
 
@@ -199,11 +233,18 @@ public class lobby : MonoBehaviour
     {
         if (Coin >= 5)
         {
-            Debug.Log("연등 1개를 구매하였습니다.");
             Coin = Coin - 5;
             Lantern = Lantern + 1;
+            Param param = new Param();
+            param.Add("Money", Coin.ToString());
+            param.Add("Lantern", Lantern.ToString());
+            Backend.GameData.Update("user", inDate, param);
+            Debug.Log("연등 1개를 구매하였습니다.");
+            
             CoinTxt.text = ": " + Coin.ToString();
             LanternTxt.text = ": " + Lantern.ToString();
+            CoinTxtCur.text = ": " + Coin.ToString();
+            LanternTxtCur.text = ": " + Lantern.ToString();
 
             StoreUI.gameObject.SetActive(false);
             LanternBoardUI.gameObject.SetActive(true);
@@ -229,5 +270,20 @@ public class lobby : MonoBehaviour
         {
             Debug.Log("소원을 입력하세요.");
         }
+    }
+    public void updateLantern() { 
+        Lantern = Lantern -1;
+        Param param = new Param();
+        param.Add("Lantern", Lantern.ToString());
+        Backend.GameData.Update("user", inDate, param);
+        LanternTxt.text = ": " + Lantern.ToString();
+        LanternTxtCur.text = ": " + Lantern.ToString();
+    }
+    public bool IsLanternGet()
+    {
+        if(Lantern > 0)
+            return true;
+        else
+            return false;
     }
 }

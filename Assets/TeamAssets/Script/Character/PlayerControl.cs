@@ -62,8 +62,9 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
         {
             transform.position = new Vector3(UnityEngine.Random.Range(defaultInitialPositionOnPlane.x, defaultInitialPositionOnPlane.y), 45,
                    UnityEngine.Random.Range(defaultInitialPositionOnPlane.x, defaultInitialPositionOnPlane.y));
-            if (transform.position.y != 45) {
-                transform.position = new Vector3(transform.position.x,45,transform.position.z);
+            while (transform.position.y != 45) {
+                characterController.SimpleMove(Vector3.up * 10);
+            
             }
             CameraMove.Instance.FollowPlayer(transform);
             _camera = Camera.main;
@@ -81,10 +82,10 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
             {
                 toggleCameraRotation = true;
             }
-            else {
+            else
+            {
                 toggleCameraRotation = false;
             }
-            //LanternSetting();
             ClientMove();
             
         }
@@ -97,22 +98,6 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotate), Time.deltaTime * smoothness);
         }
     }
-    public void LanternSetting()
-    {
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if (IsServer)
-            {
-                Spawn();
-            }
-            else if (IsClient && IsOwner)
-            {
-                SpawnServerRpc();
-            }
-
-        }
-    }
     public void Spawn()
     {
         Vector3 temp;
@@ -120,6 +105,7 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
         temp = transform.position - t;
         GameObject go = Instantiate(objectPrefabLantern, temp, Quaternion.identity);
         go.GetComponent<NetworkObject>().Spawn();
+        lobby.GetInstance().updateLantern();
     }
     [ServerRpc]
     public void SpawnServerRpc()
@@ -194,15 +180,17 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
         characterController.Move(calcVelocity * Time.deltaTime);
         if (Input.GetKeyDown(KeyCode.R))
         {
-            if (IsServer)
+            if (lobby.GetInstance().IsLanternGet())
             {
-                Spawn();
+                if (IsServer)
+                {
+                    Spawn();
+                }
+                else if (IsClient && IsOwner)
+                {
+                    SpawnServerRpc();
+                }
             }
-            else if (IsClient && IsOwner)
-            {
-                SpawnServerRpc();
-            }
-
         }
     }
     
@@ -234,8 +222,12 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
     {
         if (IsClient && IsOwner) {
             if (hit.collider == null) return;
-            else if(hit.gameObject.tag == "lotus"){
+            else if (hit.gameObject.tag == "lotus")
+            {
                 Destroy(hit.gameObject);
+            }
+            else if (hit.gameObject.tag == "burger") {
+                Couponevent.GetInstance().GetCoupon();
             }
         }
         

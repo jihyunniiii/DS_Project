@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
     public GameObject ClientServerJoincode;
     public InputField joinCodeInput;
     public GameObject loUI;
+    public GameObject CurUI;
     public GameObject LoadingUI; 
     string Hostname;
     private bool isHost = false;
@@ -51,6 +52,7 @@ public class UIManager : MonoBehaviour
 
             if (NetworkManager.Singleton.StartHost())
             {      
+                CurUI.SetActive(true);
                 loUI.SetActive(true);
                 JoingCanvas.SetActive(false);
                 Camera.SetActive(false);
@@ -81,7 +83,7 @@ public class UIManager : MonoBehaviour
         startClientButton.onClick.AddListener(async () => {
             LoadingUI.SetActive(true);
             string[] select = { "ServerPort" };
-            var bros = Backend.GameData.Get("UserInfo", "2022-05-21T11:20:34.325Z", select);
+            var bros = Backend.GameData.Get("user", "2022-05-30T13:23:21.416Z", select);
             joinCodeInput.text = bros.GetReturnValuetoJSON()["row"][0]["S"].ToString();
             
             if (RelayManager.Instance.IsRelayEnabled && !string.IsNullOrEmpty(joinCodeInput.text))
@@ -89,6 +91,7 @@ public class UIManager : MonoBehaviour
 
             if (NetworkManager.Singleton.StartClient())
             {
+                CurUI.SetActive(true);
                 LoadingUI.SetActive(false);
                 loUI.SetActive(true);
                 JoingCanvas.SetActive(false);
@@ -118,7 +121,7 @@ public class UIManager : MonoBehaviour
             Param param = new Param();
             string temp = "";
             param.Add("ServerPort", temp);
-            Backend.GameData.Update("UserInfo", "2022-05-21T11:20:34.325Z", param);
+            Backend.GameData.Update("user", "2022-05-30T13:23:21.416Z", param);
         }
     }
 }

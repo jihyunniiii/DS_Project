@@ -133,10 +133,10 @@ public class LoginField : MonoBehaviour
                     Debug.Log("회원가입에 성공했습니다");
                     Backend.BMember.CustomLogin(idInput.text, pwInput.text);
                     Param param = new Param();
-                    param.Add("재화", 10);
-                    param.Add("연등", 0);
-                    param.Add("전공", Major.text);
-                    Backend.GameData.Insert("UserInfo", param);
+                    param.Add("Money", 10);
+                    param.Add("Lantern", 0);
+                    param.Add("Major", Major.text);
+                    Backend.GameData.Insert("user", param);
                     Backend.BMember.Logout();
                     id.SetActive(true);
                     pw.SetActive(true);

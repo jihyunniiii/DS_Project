@@ -54,7 +54,7 @@ public class RelayManager : Singleton<RelayManager>
 
         Param param = new Param();
         param.Add("ServerPort", relayHostData.JoinCode);
-        Backend.GameData.Update("UserInfo", "2022-05-21T11:20:34.325Z", param);
+        Backend.GameData.Update("user", "2022-05-30T13:23:21.416Z", param);
 
         return relayHostData;
     }
