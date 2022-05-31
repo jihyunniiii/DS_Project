@@ -57,8 +57,10 @@ public class lobby : MonoBehaviour
         {
             inDate = bro.Rows()[0]["inDate"]["S"].ToString();
         }
-        Coin = int.Parse(bro.Rows()[0]["Money"]["S"].ToString());
-        Lantern = int.Parse(bro.Rows()[0]["Lantern"]["S"].ToString());
+        Debug.Log(inDate);
+        Debug.Log(bro);
+        Coin = int.Parse(bro.Rows()[0]["Money"]["N"].ToString());
+        Lantern = int.Parse(bro.Rows()[0]["Lantern"]["N"].ToString());
     }
     // Start is called before the first frame update
     void Start()
@@ -236,8 +238,8 @@ public class lobby : MonoBehaviour
             Coin = Coin - 5;
             Lantern = Lantern + 1;
             Param param = new Param();
-            param.Add("Money", Coin.ToString());
-            param.Add("Lantern", Lantern.ToString());
+            param.Add("Money", Coin);
+            param.Add("Lantern", Lantern);
             Backend.GameData.Update("user", inDate, param);
             Debug.Log("연등 1개를 구매하였습니다.");
             
@@ -274,7 +276,7 @@ public class lobby : MonoBehaviour
     public void updateLantern() { 
         Lantern = Lantern -1;
         Param param = new Param();
-        param.Add("Lantern", Lantern.ToString());
+        param.Add("Lantern", Lantern);
         Backend.GameData.Update("user", inDate, param);
         LanternTxt.text = ": " + Lantern.ToString();
         LanternTxtCur.text = ": " + Lantern.ToString();

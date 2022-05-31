@@ -1,0 +1,201 @@
+fileFormatVersion: 2
+guid: 87cc043976335f24892d12b418e7ba11
+timeCreated: 1521533053
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Elephant 01
+    100002: //RootNode
+    100004: Rig
+    100006: RigEarL
+    100008: RigEarLGizmo
+    100010: RigEarR
+    100012: RigEarRGizmo
+    100014: RigHead
+    100016: RigHeadGizmo
+    100018: RigJaw
+    100020: RigJawGizmo
+    100022: RigLLegB1
+    100024: RigLLegB2
+    100026: RigLLegBAnkle
+    100028: RigLLegBFoot1
+    100030: RigLLegBPlatform
+    100032: RigLLegF1
+    100034: RigLLegF2
+    100036: RigLLegFAnkle
+    100038: RigLLegFFoot1
+    100040: RigLLegFPlatform
+    100042: RigNeck1
+    100044: RigNeck2
+    100046: RigNose1
+    100048: RigNose1Gizmo
+    100050: RigNose2
+    100052: RigNose2Gizmo
+    100054: RigNose3
+    100056: RigNose3Gizmo
+    100058: RigNose4
+    100060: RigNose4Gizmo
+    100062: RigNose5
+    100064: RigNose5Gizmo
+    100066: RigPelvis
+    100068: RigPelvisGizmo
+    100070: RigRibcage
+    100072: RigRibcageGizmo
+    100074: RigRLegB1
+    100076: RigRLegB2
+    100078: RigRLegBAnkle
+    100080: RigRLegBFoot1
+    100082: RigRLegBPlatform
+    100084: RigRLegF1
+    100086: RigRLegF2
+    100088: RigRLegFAnkle
+    100090: RigRLegFFoot1
+    100092: RigRLegFPlatform
+    100094: RigSpine1
+    100096: RigSpine2
+    100098: RigSpine3
+    100100: RigTail1
+    100102: RigTail1Gizmo
+    100104: RigTail2
+    100106: RigTail2Gizmo
+    100108: RigTail3
+    100110: RigTail3Gizmo
+    100112: RigTail4
+    100114: RigTail4Gizmo
+    100116: RigTail5
+    100118: RigTail5Gizmo
+    400000: Elephant 01
+    400002: //RootNode
+    400004: Rig
+    400006: RigEarL
+    400008: RigEarLGizmo
+    400010: RigEarR
+    400012: RigEarRGizmo
+    400014: RigHead
+    400016: RigHeadGizmo
+    400018: RigJaw
+    400020: RigJawGizmo
+    400022: RigLLegB1
+    400024: RigLLegB2
+    400026: RigLLegBAnkle
+    400028: RigLLegBFoot1
+    400030: RigLLegBPlatform
+    400032: RigLLegF1
+    400034: RigLLegF2
+    400036: RigLLegFAnkle
+    400038: RigLLegFFoot1
+    400040: RigLLegFPlatform
+    400042: RigNeck1
+    400044: RigNeck2
+    400046: RigNose1
+    400048: RigNose1Gizmo
+    400050: RigNose2
+    400052: RigNose2Gizmo
+    400054: RigNose3
+    400056: RigNose3Gizmo
+    400058: RigNose4
+    400060: RigNose4Gizmo
+    400062: RigNose5
+    400064: RigNose5Gizmo
+    400066: RigPelvis
+    400068: RigPelvisGizmo
+    400070: RigRibcage
+    400072: RigRibcageGizmo
+    400074: RigRLegB1
+    400076: RigRLegB2
+    400078: RigRLegBAnkle
+    400080: RigRLegBFoot1
+    400082: RigRLegBPlatform
+    400084: RigRLegF1
+    400086: RigRLegF2
+    400088: RigRLegFAnkle
+    400090: RigRLegFFoot1
+    400092: RigRLegFPlatform
+    400094: RigSpine1
+    400096: RigSpine2
+    400098: RigSpine3
+    400100: RigTail1
+    400102: RigTail1Gizmo
+    400104: RigTail2
+    400106: RigTail2Gizmo
+    400108: RigTail3
+    400110: RigTail3Gizmo
+    400112: RigTail4
+    400114: RigTail4Gizmo
+    400116: RigTail5
+    400118: RigTail5Gizmo
+    4300000: Elephant 01
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Elephant 01
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
