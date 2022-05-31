@@ -101,11 +101,10 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
     public void Spawn()
     {
         Vector3 temp;
-        Vector3 t = new Vector3(0, 8f, 0);
+        Vector3 t = new Vector3(0, 5f, 0);
         temp = transform.position - t;
         GameObject go = Instantiate(objectPrefabLantern, temp, Quaternion.identity);
         go.GetComponent<NetworkObject>().Spawn();
-        lobby.GetInstance().updateLantern();
     }
     [ServerRpc]
     public void SpawnServerRpc()
@@ -185,10 +184,12 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
                 if (IsServer)
                 {
                     Spawn();
+                    lobby.GetInstance().updateLantern();
                 }
                 else if (IsClient && IsOwner)
                 {
                     SpawnServerRpc();
+                    lobby.GetInstance().updateLantern();
                 }
             }
         }

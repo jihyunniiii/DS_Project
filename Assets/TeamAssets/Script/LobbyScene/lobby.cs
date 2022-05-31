@@ -57,8 +57,7 @@ public class lobby : MonoBehaviour
         {
             inDate = bro.Rows()[0]["inDate"]["S"].ToString();
         }
-        Debug.Log(inDate);
-        Debug.Log(bro);
+       
         Coin = int.Parse(bro.Rows()[0]["Money"]["N"].ToString());
         Lantern = int.Parse(bro.Rows()[0]["Lantern"]["N"].ToString());
     }
@@ -277,6 +276,7 @@ public class lobby : MonoBehaviour
         Lantern = Lantern -1;
         Param param = new Param();
         param.Add("Lantern", Lantern);
+       
         Backend.GameData.Update("user", inDate, param);
         LanternTxt.text = ": " + Lantern.ToString();
         LanternTxtCur.text = ": " + Lantern.ToString();

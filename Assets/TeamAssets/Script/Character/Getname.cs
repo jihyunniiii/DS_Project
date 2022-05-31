@@ -7,23 +7,23 @@ using Unity.Netcode;
 public class Getname : NetworkBehaviour
 {
     private NetworkVariable<NetworkString> playersName = new NetworkVariable<NetworkString>();
-
+    public TextMeshProUGUI localPlayerOverlay;
     private bool overlaySet = false;
     //private bool isonetimeset = false;
     // Start is called before the first frame update
-  
+    
     public override void OnNetworkSpawn()
     {
-        if (IsServer) { playersName.Value = $"Player {OwnerClientId}"; }
+       
     }
     public void SetOverlay() { 
-        var localPlayerOverlay = gameObject.GetComponentInChildren<TextMeshProUGUI>();
-        localPlayerOverlay.text = playersName.Value;
+        BackendReturnObject bro = Backend.BMember.GetUserInfo();
+        localPlayerOverlay.text = bro.GetReturnValuetoJSON()["row"]["nickname"].ToString();
     }
 
     private void Update()
     {
-        if (!overlaySet && !string.IsNullOrEmpty(playersName.Value)) { 
+        if (!overlaySet) { 
             SetOverlay();
             overlaySet = true;
         }

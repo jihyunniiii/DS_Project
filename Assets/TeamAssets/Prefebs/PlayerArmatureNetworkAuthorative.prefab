@@ -806,6 +806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74634c982c0d0e14e83b43b2be01f663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  localPlayerOverlay: {fileID: 1739540155130014271}
 --- !u!114 &4648444932332154250
 MonoBehaviour:
   m_ObjectHideFlags: 0
