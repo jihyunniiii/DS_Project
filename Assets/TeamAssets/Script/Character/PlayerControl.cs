@@ -2,7 +2,7 @@ using Unity.Netcode;
 using UnityEngine;
 using DilmerGames.Core.Singletons;
 using Unity.Netcode.Samples;
-
+using TMPro;
 [RequireComponent(typeof(NetworkObject))]
 [RequireComponent(typeof(ClientNetworkTransform))]
 public class PlayerControl : NetworkSingleton<PlayerControl>
@@ -33,9 +33,7 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
     private NetworkVariable<PlayerState> networkPlayerState = new NetworkVariable<PlayerState>();
     //to calculate
     private Vector3 calcVelocity = Vector3.zero;
-
-    //movement(vector3)
-
+  
     //prevent double jump
     [SerializeField]
     LayerMask groundLayerMask; // in the ground layer, player can jump only
@@ -44,7 +42,8 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
     private bool isGrounded;
     private bool isJumping = false;
     #endregion
-
+    private NetworkVariable<NetworkString> playersName = new NetworkVariable<NetworkString>();
+    private bool overlaySet = false;
     Camera _camera;
     bool toggleCameraRotation = false;
     float smoothness = 10.0f;
@@ -62,20 +61,15 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
         {
             transform.position = new Vector3(UnityEngine.Random.Range(defaultInitialPositionOnPlane.x, defaultInitialPositionOnPlane.y), 45,
                    UnityEngine.Random.Range(defaultInitialPositionOnPlane.x, defaultInitialPositionOnPlane.y));
-            while (transform.position.y != 45) {
-                characterController.SimpleMove(Vector3.up * 10);
-            
-            }
             CameraMove.Instance.FollowPlayer(transform);
             _camera = Camera.main;
         }
         
     }
-
+    
     // Update is called once per frame
     void Update()
     {
-
         if (IsClient && IsOwner)
         {
             if (Input.GetKey(KeyCode.LeftControl))
@@ -86,11 +80,14 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
             {
                 toggleCameraRotation = false;
             }
+         
             ClientMove();
-            
         }
         Client_visual();
     }
+
+   
+
     private void LateUpdate()
     {
         if (toggleCameraRotation != true) {
@@ -227,8 +224,13 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
             {
                 Destroy(hit.gameObject);
             }
-            else if (hit.gameObject.tag == "burger") {
+            else if (hit.gameObject.tag == "burger")
+            {
                 Couponevent.GetInstance().GetCoupon();
+            }
+            else if (hit.gameObject.tag == "Fall") {
+                Debug.Log("¿Ãµø");
+                FallManager.GetInstance().SpawnCharacter(transform);
             }
         }
         

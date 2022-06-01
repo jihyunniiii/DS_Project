@@ -46,12 +46,18 @@ public class UIManager : MonoBehaviour
         }
 
         startHostButton.onClick.AddListener(async () => {
+            Where where = new Where();
+            var bros = Backend.GameData.GetMyData("user", where);
+            string inDate = bros.Rows()[0]["inDate"]["S"].ToString();
+            Param param = new Param();
+            param.Add("ServerJoin", "O");
+            Backend.GameData.Update("user", inDate, param);
             LoadingUI.SetActive(true);
             if (RelayManager.Instance.IsRelayEnabled)
                 await RelayManager.Instance.SetupRelay();
 
             if (NetworkManager.Singleton.StartHost())
-            {      
+            {
                 CurUI.SetActive(true);
                 loUI.SetActive(true);
                 JoingCanvas.SetActive(false);
@@ -81,6 +87,12 @@ public class UIManager : MonoBehaviour
             }
         });*/
         startClientButton.onClick.AddListener(async () => {
+            Where where = new Where();
+            var bross = Backend.GameData.GetMyData("user", where);
+            string inDate = bross.Rows()[0]["inDate"]["S"].ToString();
+            Param param = new Param();
+            param.Add("ServerJoin", "O");
+            Backend.GameData.Update("user", inDate, param);
             LoadingUI.SetActive(true);
             string[] select = { "ServerPort" };
             var bros = Backend.GameData.Get("user", "2022-05-30T13:23:21.416Z", select);

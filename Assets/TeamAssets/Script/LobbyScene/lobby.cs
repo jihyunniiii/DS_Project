@@ -276,7 +276,6 @@ public class lobby : MonoBehaviour
         Lantern = Lantern -1;
         Param param = new Param();
         param.Add("Lantern", Lantern);
-       
         Backend.GameData.Update("user", inDate, param);
         LanternTxt.text = ": " + Lantern.ToString();
         LanternTxtCur.text = ": " + Lantern.ToString();
@@ -287,5 +286,9 @@ public class lobby : MonoBehaviour
             return true;
         else
             return false;
+    }
+    public string getNickname() {
+        BackendReturnObject bro = Backend.BMember.GetUserInfo();
+        return bro.GetReturnValuetoJSON()["row"]["nickname"].ToString();
     }
 }
