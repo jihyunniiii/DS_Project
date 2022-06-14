@@ -7,6 +7,7 @@ using TMPro;
 [RequireComponent(typeof(ClientNetworkTransform))]
 public class PlayerControl : NetworkSingleton<PlayerControl>
 {
+    public BlockConfig newBlockConfig;
     #region Variables
     //basic variables about the movements
     [SerializeField]
@@ -33,7 +34,7 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
     private NetworkVariable<PlayerState> networkPlayerState = new NetworkVariable<PlayerState>();
     //to calculate
     private Vector3 calcVelocity = Vector3.zero;
-  
+
     //prevent double jump
     [SerializeField]
     LayerMask groundLayerMask; // in the ground layer, player can jump only
@@ -52,7 +53,7 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
     {
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
-        
+
     }
 
     void Start()
@@ -64,9 +65,9 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
             CameraMove.Instance.FollowPlayer(transform);
             _camera = Camera.main;
         }
-        
+
     }
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -80,17 +81,18 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
             {
                 toggleCameraRotation = false;
             }
-         
+
             ClientMove();
         }
         Client_visual();
     }
 
-   
+
 
     private void LateUpdate()
     {
-        if (toggleCameraRotation != true) {
+        if (toggleCameraRotation != true)
+        {
             Vector3 playerRotate = Vector3.Scale(_camera.transform.forward, new Vector3(1, 0, 1));
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotate), Time.deltaTime * smoothness);
         }
@@ -133,7 +135,7 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
     {
         //bool isGrounded = characterController.isGrounded;
         isGrounded = IsCheckGrounded();
-       
+
         if (isGrounded && calcVelocity.y < 0)
         {
             calcVelocity.y = 0f;
@@ -191,7 +193,7 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
             }
         }
     }
-    
+
     [ServerRpc]
     public void UpdatePlayerStateServerRpc(PlayerState state)
     {
@@ -218,7 +220,8 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
     }
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (IsClient && IsOwner) {
+        if (IsClient && IsOwner)
+        {
             if (hit.collider == null) return;
             else if (hit.gameObject.tag == "lotus")
             {
@@ -228,11 +231,31 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
             {
                 Couponevent.GetInstance().GetCoupon();
             }
-            else if (hit.gameObject.tag == "Fall") {
+            else if (hit.gameObject.tag == "Fall")
+            {
                 Debug.Log("이동");
                 FallManager.GetInstance().SpawnCharacter(transform);
             }
+            else if (hit.gameObject.tag == "GameOver")
+            {
+                Debug.Log("이동");
+                GameOverManager.GetInstance().SpawnCharacter(transform);
+            }
+            else if (hit.gameObject.tag == "Hex1" || hit.gameObject.tag == "Hex2" || hit.gameObject.tag == "Hex3" || hit.gameObject.tag == "Hex4" || hit.gameObject.tag == "Hex5")
+            {
+                Debug.Log("삭제");
+                GameObject explosionObj = newBlockConfig.GetExplosionObject();
+                explosionObj.SetActive(true);
+                explosionObj.transform.position = hit.gameObject.transform.position;
+                Destroy(hit.gameObject, 0.2f);
+            }
+            else if (hit.gameObject.tag == "GameStart")
+            {
+
+                //Debug.Log("게임 시작");
+                GameOverManager.GetInstance().GameStart(transform);
+            }
         }
-        
+
     }
 }

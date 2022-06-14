@@ -45,26 +45,27 @@ public class lobby : MonoBehaviour
     private static lobby instance = null;
     private void Awake()
     {
-        if (instance != null) {
+        if (instance != null)
+        {
             Destroy(instance);
         }
         instance = this;
         //돈, 랜턴 갯수 초기화(데비터베이스 접근)
         Where where = new Where();
         var bro = Backend.GameData.GetMyData("user", where);
-        
+
         if (bro.Rows().Count > 0)
         {
             inDate = bro.Rows()[0]["inDate"]["S"].ToString();
         }
-       
+
         Coin = int.Parse(bro.Rows()[0]["Money"]["N"].ToString());
         Lantern = int.Parse(bro.Rows()[0]["Lantern"]["N"].ToString());
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+
         audioSource = GetComponent<AudioSource>();
         UI.gameObject.SetActive(false);
 
@@ -74,7 +75,7 @@ public class lobby : MonoBehaviour
         CoinTxtCur.text = ": " + Coin.ToString();
         LanternTxtCur.text = ": " + Lantern.ToString();
         BoardWishTxt.text = ": " + wishnum.ToString();
-        
+
     }
 
     // Update is called once per frame
@@ -90,7 +91,7 @@ public class lobby : MonoBehaviour
             }
 
             else if (UI.activeSelf == false && SettingUI.activeSelf == false)
-            { 
+            {
                 UI.gameObject.SetActive(true);
                 loUI.SetActive(false);
                 CurUI.SetActive(false);
@@ -117,16 +118,17 @@ public class lobby : MonoBehaviour
                     LanternTxtCur.text = ": " + Lantern.ToString();
                 }
 
-                if (hit.collider.gameObject == GameRoomBack || hit.collider.gameObject == GameRoomFront && SettingSound.activeSelf == false && UI.activeSelf == false && SettingUI.activeSelf == false && StoreUI.activeSelf == false && LanternBoardUI.activeSelf == false)
+                /*if (hit.collider.gameObject == GameRoomBack || hit.collider.gameObject == GameRoomFront && SettingSound.activeSelf == false && UI.activeSelf == false && SettingUI.activeSelf == false && StoreUI.activeSelf == false && LanternBoardUI.activeSelf == false)
                 {
-                    Debug.Log("게임 매칭 룸으로 이동합니다.");
-                    GameObject.FindWithTag("FadeController").GetComponent<FadeInOut>().FadeToNext();
-                }
+                    Debug.Log("게임으로 이동합니다.");
+                    //GameObject.FindWithTag("FadeController").GetComponent<FadeInOut>().FadeToNext();
+                }*/
             }
         }
     }
-    public static lobby GetInstance() {
-        if(!instance)
+    public static lobby GetInstance()
+    {
+        if (!instance)
         {
             return null;
         }
@@ -241,7 +243,7 @@ public class lobby : MonoBehaviour
             param.Add("Lantern", Lantern);
             Backend.GameData.Update("user", inDate, param);
             Debug.Log("연등 1개를 구매하였습니다.");
-            
+
             CoinTxt.text = ": " + Coin.ToString();
             LanternTxt.text = ": " + Lantern.ToString();
             CoinTxtCur.text = ": " + Coin.ToString();
@@ -272,8 +274,9 @@ public class lobby : MonoBehaviour
             Debug.Log("소원을 입력하세요.");
         }
     }
-    public void updateLantern() { 
-        Lantern = Lantern -1;
+    public void updateLantern()
+    {
+        Lantern = Lantern - 1;
         Param param = new Param();
         param.Add("Lantern", Lantern);
         Backend.GameData.Update("user", inDate, param);
@@ -282,13 +285,22 @@ public class lobby : MonoBehaviour
     }
     public bool IsLanternGet()
     {
-        if(Lantern > 0)
+        if (Lantern > 0)
             return true;
         else
             return false;
     }
-    public string getNickname() {
+    public string getNickname()
+    {
         BackendReturnObject bro = Backend.BMember.GetUserInfo();
         return bro.GetReturnValuetoJSON()["row"]["nickname"].ToString();
+    }
+    public void CoinUpdate()
+    {
+        Where where = new Where();
+        var bro = Backend.GameData.GetMyData("user", where);
+        Coin = int.Parse(bro.Rows()[0]["Money"]["N"].ToString());
+        CoinTxt.text = ": " + Coin.ToString();
+        CoinTxtCur.text = ": " + Coin.ToString();
     }
 }

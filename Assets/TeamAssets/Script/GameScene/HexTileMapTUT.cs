@@ -11,14 +11,14 @@ public class HexTileMapTUT : MonoBehaviour
     [SerializeField] int mapWidth = 25;
     [SerializeField] int mapHeight = 25;
 
-    float tileXOffset = 1.0f;
-    float tileZOffset = 0.87f;
+    float tileXOffset = 4.0f;
+    float tileZOffset = 3.48f;
 
     // Start is called before the first frame update
     void Start()
     {
         CreatHexTileMap();
-        Invoke("settingFinish", 0.1f);
+        Invoke("settingFinish", 1f);
     }
 
     void CreatHexTileMap() {
@@ -88,27 +88,28 @@ public class HexTileMapTUT : MonoBehaviour
         GameObject[] temp4 = GameObject.FindGameObjectsWithTag("Hex4");
         GameObject[] temp5 = GameObject.FindGameObjectsWithTag("Hex5");
         for (int x = 0; x < temp1.Length; x++) {
-            temp1[x].GetComponent<MeshCollider>().isTrigger = false; 
+            temp1[x].GetComponent<MeshCollider>().isTrigger = false;
+            temp1[x].transform.Translate(new Vector3(0, 500, 0), Space.Self);
         }
         for (int x = 0; x < temp2.Length; x++)
         {
             temp2[x].GetComponent<MeshCollider>().isTrigger = false;
-            temp2[x].transform.Translate(new Vector3(0, 10, 0), Space.Self);
+            temp2[x].transform.Translate(new Vector3(0, 540, 0), Space.Self);
         }
         for (int x = 0; x < temp3.Length; x++)
         {
             temp3[x].GetComponent<MeshCollider>().isTrigger = false;
-            temp3[x].transform.Translate(new Vector3(0, 20, 0), Space.Self);
+            temp3[x].transform.Translate(new Vector3(0, 580, 0), Space.Self);
         }
         for (int x = 0; x < temp4.Length; x++)
         {
             temp4[x].GetComponent<MeshCollider>().isTrigger = false;
-            temp4[x].transform.Translate(new Vector3(0, 30, 0), Space.Self);
+            temp4[x].transform.Translate(new Vector3(0, 620, 0), Space.Self);
         }
         for (int x = 0; x < temp5.Length; x++)
         {
             temp5[x].GetComponent<MeshCollider>().isTrigger = false;
-            temp5[x].transform.Translate(new Vector3(0, 40, 0), Space.Self);
+            temp5[x].transform.Translate(new Vector3(0, 660, 0), Space.Self);
         }
     }
 }

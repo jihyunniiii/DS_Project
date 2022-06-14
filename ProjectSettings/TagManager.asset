@@ -18,6 +18,8 @@ TagManager:
   - CinemachineTarget
   - burger
   - Fall
+  - GameOver
+  - GameStart
   layers:
   - Default
   - TransparentFX

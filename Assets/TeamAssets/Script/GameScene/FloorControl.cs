@@ -13,7 +13,7 @@ public class FloorControl : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
@@ -22,5 +22,5 @@ public class FloorControl : MonoBehaviour
             explosionObj.transform.position = gameObject.transform.position;
             Destroy(gameObject, 0.5f);
         }
-    }
+    }*/
 }
