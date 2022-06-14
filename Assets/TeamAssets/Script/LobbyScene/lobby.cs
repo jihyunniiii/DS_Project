@@ -17,7 +17,7 @@ public class lobby : MonoBehaviour
     public GameObject CurUI;
     public Slider audioSlider;
     public AudioSource audioSource;
-
+    public GameObject ChatUI;
     public GameObject StoreBack;
     public GameObject StoreFront;
     public GameObject StoreUI;
@@ -68,7 +68,7 @@ public class lobby : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
         UI.gameObject.SetActive(false);
-
+        ChatUI.gameObject.SetActive(false);
         wishnum = 0;
         CoinTxt.text = ": " + Coin.ToString();
         LanternTxt.text = ": " + Lantern.ToString();
@@ -97,7 +97,15 @@ public class lobby : MonoBehaviour
                 CurUI.SetActive(false);
             }
         }
-
+        if (Input.GetKeyUp(KeyCode.Slash)) {
+            if (ChatUI.activeSelf == true)
+            {
+                ChatUI.SetActive(false);
+            }
+            else if (ChatUI.activeSelf == false) {
+                ChatUI.SetActive(true);
+            }
+        }
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = getCamera.ScreenPointToRay(Input.mousePosition);

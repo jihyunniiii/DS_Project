@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/TeamAssets/Scenes/GameRoom.unity
     guid: 5c7969c5853c1594fbe34ba0541ff9a6
+  - enabled: 0
+    path: Assets/TheBackend/Examples/chat/ChatTest-login.unity
+    guid: fc0a5eef123b248ce8b76b92a28e157b
+  - enabled: 0
+    path: Assets/TheBackend/Examples/chat/ChatTest-channellist.unity
+    guid: d885c128a42f90a49a2afaa1736bdaa1
   m_configObjects: {}

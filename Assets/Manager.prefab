@@ -1,0 +1,160 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1415239234870622715
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1415239234870622713}
+  - component: {fileID: 1415239234870622714}
+  - component: {fileID: 1415239234870622710}
+  - component: {fileID: 1415239234870622711}
+  - component: {fileID: 1415239234870622712}
+  - component: {fileID: 1415239234870622709}
+  - component: {fileID: 1415239234870622707}
+  - component: {fileID: 1415239234870622708}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1415239234870622713
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415239234870622715}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 557.9191, y: 351.66174, z: -109.90693}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1415239234870622714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415239234870622715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9ec23885fdc5f24dbf355eb574f9671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  publicToggle: {fileID: 0}
+  guildToggle: {fileID: 0}
+  searchPannel: {fileID: 0}
+  searchInputField: {fileID: 0}
+  searchButton: {fileID: 0}
+  publicChatModal: {fileID: 0}
+  guildChatModal: {fileID: 0}
+  guildCreatePanel: {fileID: 0}
+  channelScrollView: {fileID: 0}
+  public_channel_alias: {fileID: 0}
+  guild_channel_alias: {fileID: 0}
+  alert: {fileID: 0}
+--- !u!114 &1415239234870622710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415239234870622715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6019fcb9c072549e8958673b60a1c3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  publicChatChannel: {fileID: 0}
+  guildChatChannel: {fileID: 0}
+--- !u!114 &1415239234870622711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415239234870622715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18496d7f0c93640cdb06229eae2739fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alert: {fileID: 0}
+  button: {fileID: 0}
+  alertModalPanelObject: {fileID: 0}
+  _ContentSizeFitter: {fileID: 0}
+--- !u!114 &1415239234870622712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415239234870622715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a26a36fd7a143a3b7ffd2cd17e9ff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  publicContent: {fileID: 0}
+  guildContent: {fileID: 0}
+  whisperColor: {r: 0.39215687, g: 0.42352942, b: 0.8784314, a: 1}
+--- !u!114 &1415239234870622709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415239234870622715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd6dfb77bcdf4eaf8bb077c843f6c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guild_chat_alert_panel: {fileID: 0}
+  guild_chat_panel: {fileID: 0}
+  publicFilteringOn: {fileID: 0}
+  publicMessage: {fileID: 0}
+  guildMessage: {fileID: 0}
+--- !u!114 &1415239234870622707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415239234870622715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15ef42e4b606043f5889ca61ad8a2d4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  publicContent: {fileID: 0}
+  guildContent: {fileID: 0}
+--- !u!114 &1415239234870622708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415239234870622715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd388e4886e5249d9857574ea462df38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserPanel: {fileID: 0}
+  UserPanelModal: {fileID: 0}
+  ReportPanel: {fileID: 0}
+  ReportNickname: {fileID: 0}
+  reportReasons: {fileID: 0}
+  reportDetails: {fileID: 0}
+  reportCancel: {fileID: 0}
