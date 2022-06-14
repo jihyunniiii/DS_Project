@@ -68,7 +68,7 @@ public class lobby : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
         UI.gameObject.SetActive(false);
-        ChatUI.gameObject.SetActive(false);
+        Invoke("SetChat", 0.1f);
         wishnum = 0;
         CoinTxt.text = ": " + Coin.ToString();
         LanternTxt.text = ": " + Lantern.ToString();
@@ -133,6 +133,9 @@ public class lobby : MonoBehaviour
                 }*/
             }
         }
+    }
+    private void SetChat() {
+        ChatUI.gameObject.SetActive(false);
     }
     public static lobby GetInstance()
     {
