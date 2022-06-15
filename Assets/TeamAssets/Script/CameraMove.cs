@@ -19,7 +19,7 @@ public class CameraMove : Singleton<CameraMove>
     public float maxDistance;
     public float finalDistance;
     public float smoothness;
-
+    bool chatting = false;
     private void Start()
     {
         rotX = transform.localRotation.eulerAngles.x;
@@ -36,6 +36,19 @@ public class CameraMove : Singleton<CameraMove>
     }
     private void Update()
     {
+        if (Input.GetKeyUp(KeyCode.F2))
+        {
+            if (chatting == true)
+            {
+                chatting = false;
+            }
+            else if (chatting == false)
+            {
+                chatting = true;
+            }
+        }
+        if (chatting)
+            return;
         rotX += -(Input.GetAxis("Mouse Y")) * sensitivity * Time.deltaTime;
         rotY += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
 

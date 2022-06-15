@@ -48,6 +48,7 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
     Camera _camera;
     bool toggleCameraRotation = false;
     float smoothness = 10.0f;
+    bool chatting = false;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -71,8 +72,21 @@ public class PlayerControl : NetworkSingleton<PlayerControl>
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyUp(KeyCode.F2))
+        {
+            if (chatting == true)
+            {
+                chatting = false;
+            }
+            else if (chatting == false)
+            {
+                chatting = true;
+            }
+        }
         if (IsClient && IsOwner)
         {
+            if (chatting)
+                return;
             if (Input.GetKey(KeyCode.LeftControl))
             {
                 toggleCameraRotation = true;

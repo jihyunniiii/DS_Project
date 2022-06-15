@@ -28,7 +28,7 @@ public class ChatManager : MonoBehaviour
     protected void Update()
     {
         Backend.Chat.Poll();
-        if (Input.GetKeyDown(KeyCode.F3))
+        if (Input.GetKeyDown(KeyCode.F5))
         {
             if (ChatJoind)
             {

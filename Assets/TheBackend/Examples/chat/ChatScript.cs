@@ -65,7 +65,7 @@ public class ChatScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F3))
+        if (Input.GetKeyDown(KeyCode.F5))
         {
             Debug.Log("LeaveChannel");
             LeaveChannel();

@@ -97,7 +97,7 @@ public class lobby : MonoBehaviour
                 CurUI.SetActive(false);
             }
         }
-        if (Input.GetKeyUp(KeyCode.Equals)) {
+        if (Input.GetKeyUp(KeyCode.F2)) {
             if (ChatUI.activeSelf == true)
             {
                 ChatUI.SetActive(false);
