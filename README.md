@@ -87,7 +87,7 @@
 | :-----: | :-----: |
 | 쿠폰존 | 쿠폰 획득 화면 |
 
-### 📝 
-[metaverse_dongsim_최종보고서](https://github.com/jihyunniiii/DS_Project/files/10963250/metaverse_dongsim_.pdf)
-[metaverse_dongsim_최종발표자료](https://github.com/jihyunniiii/DS_Project/files/10963252/metaverse_dongsim_.pdf)
+### 📝 자료
+[metaverse_dongsim_최종보고서](https://drive.google.com/file/d/1VRkRdc33IKQprW5Nb8Qx4YdwZLt74lES/view?usp=sharing)   
+[metaverse_dongsim_최종발표자료](https://drive.google.com/file/d/1NspSIc1LAKeLXRIEbGwx345YCvSCoBZG/view?usp=sharing)   
 [metaverse_dongsim_시연영상](https://www.youtube.com/watch?v=sEu9GWfyJcc)
